@@ -21,7 +21,7 @@ const styles = (theme: ThemeType): JssStyles => ({
     position: "relative",
     minHeight: 58,
     boxShadow: theme.boxShadow,
-    borderRadius: 5,
+    borderRadius: 3,
     backgroundColor: "rgba(253,253,253)",
   },
   postStyle: theme.typography.postStyle,
@@ -51,9 +51,6 @@ const styles = (theme: ThemeType): JssStyles => ({
     overflow: "hidden",
     '& a, & a:hover, & a:focus, & a:active, & a:visited': {
       backgroundColor: "none"
-    },
-    '& blockquote': {
-        ...theme.typography.blockquote,
     }
   },
   noComments: {
@@ -85,30 +82,25 @@ const styles = (theme: ThemeType): JssStyles => ({
     }
   },
   post: {
-    paddingTop: 20,
-    paddingLeft: 20,
-    paddingRight: 20,
+    paddingTop: 18,
+    paddingLeft: 16,
+    paddingRight: 16,
     background: "white",
-    borderRadius: 5,
-    marginBottom: 2
+    borderRadius: 3,
+    marginBottom:4
   },
   titleAndActions: {
     display: "flex",
   },
   title: {
     ...theme.typography.display2,
-    // ...theme.typography.postStyle,
+    ...theme.typography.postStyle,
     flexGrow: 1,
     marginTop: 0,
     marginBottom: 8,
     display: "block",
-    fontSize: "1.9rem",
+    fontSize: "1.75rem",
   },
-
-  blockquote: {
-    ...theme.typography.blockquote,
-  },
-
   actions: {
     "& .PostsPageActions-icon": {
       fontSize: "1.5em",

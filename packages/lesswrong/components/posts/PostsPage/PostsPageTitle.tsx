@@ -9,10 +9,9 @@ export const postPageTitleStyles = theme => ({
   ...theme.typography.display3,
   ...theme.typography.postStyle,
   ...theme.typography.headerStyle,
-  lineHeight: 1.2,
   marginTop: 0,
   marginLeft: 0,
-  marginBottom: forumTypeSetting.get() === 'EAForum' ? theme.spacing.unit : 8,
+  marginBottom: forumTypeSetting.get() === 'EAForum' ? theme.spacing.unit : 0,
   color: theme.palette.text.primary,
   [theme.breakpoints.down('sm')]: {
     fontSize: '2.5rem',

@@ -22,13 +22,12 @@ const styles = (theme: ThemeType): JssStyles => ({
     textOverflow: "ellipsis",
     whiteSpace: "nowrap",
     alignItems: "center",
-    fontSize: "1.25rem", // article name on horizontal white card on homepage
-    fontWeight: 400,
+    fontSize: "1.3rem",
     [theme.breakpoints.down('xs')]: {
       whiteSpace: "unset",
       lineHeight: "1.8rem",
     },
-    fontFamily: theme.typography.latestCardStyle.fontFamily,
+    fontFamily: theme.typography.postStyle.fontFamily,
     marginRight: theme.spacing.unit,
   },
   wrap: {

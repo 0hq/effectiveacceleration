@@ -28,9 +28,8 @@ export const highlightStyles = (theme: ThemeType) => ({
   marginRight: theme.spacing.unit/2,
   wordBreak: 'break-word',
   fontSize: "1.1rem",
-  // fontWeight: 700,
   '& h1': {
-    fontSize: "1.2rem",
+    fontSize: "1.2rem"
   },
   '& h2': {
     fontSize: "1.2rem"
@@ -65,11 +64,10 @@ const styles = (theme: ThemeType): JssStyles => ({
   header: {
     display: "flex",
     alignItems: "center",
-    justifyContent: "space-between",
+    justifyContent: "space-between"
   },
   title: {
     marginBottom: -6,
-    // fontWeight: 700,
   },
   tooltipInfo: {
     marginLeft: 2,
@@ -81,7 +79,7 @@ const styles = (theme: ThemeType): JssStyles => ({
     alignItems: "center"
   },
   highlight: {
-    ...highlightStyles(theme),
+    ...highlightStyles(theme)
   },
   comment: {
     marginTop: theme.spacing.unit,
