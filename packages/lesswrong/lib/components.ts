@@ -27,6 +27,7 @@ if (forumTypeSetting.get() === 'EAForum') {
 
 if (forumTypeSetting.get() === 'ProgressForum') {
   importComponent("PFLibraryHome", () => require('../components/progress-forum/PFLibraryHome'));
+  importComponent("SiteLogo", () => require('../components/progress-forum/SiteLogo'));
 }
 
 importComponent("ConversationTitleEditForm", () => require('../components/messaging/ConversationTitleEditForm'));

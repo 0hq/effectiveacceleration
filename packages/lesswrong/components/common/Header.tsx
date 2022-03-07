@@ -251,7 +251,7 @@ const Header = ({standaloneNavigationPresent, toggleStandaloneNavigation, toc, s
     </React.Fragment>
   }
 
-  const hasLogo = forumTypeSetting.get() === 'EAForum'
+  const hasLogo = forumTypeSetting.get() === "ProgressForum";
 
   const {
     SearchBar, UsersMenu, UsersAccountMenu, NotificationsMenuButton, NavigationDrawer,
@@ -280,7 +280,6 @@ const Header = ({standaloneNavigationPresent, toggleStandaloneNavigation, toc, s
                   <div className={classes.titleSubtitleContainer}>
                     <Link to="/" className={classes.titleLink}>
                       {hasLogo && <div className={classes.siteLogo}><Components.SiteLogo/></div>}
-                      {forumHeaderTitleSetting.get()}
                     </Link>
                     <HeaderSubtitle />
                   </div>
@@ -288,7 +287,6 @@ const Header = ({standaloneNavigationPresent, toggleStandaloneNavigation, toc, s
                 <div className={classes.hideMdUp}>
                   <Link to="/" className={classes.titleLink}>
                     {hasLogo && <div className={classes.siteLogo}><Components.SiteLogo/></div>}
-                    {forumShortTitleSetting.get()}
                   </Link>
                 </div>
               </Typography>

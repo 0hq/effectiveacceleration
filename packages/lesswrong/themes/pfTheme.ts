@@ -3,6 +3,7 @@ import grey from "@material-ui/core/colors/grey";
 import deepOrange from "@material-ui/core/colors/deepOrange";
 
 const sansSerifStack = [
+  "Lato",
   "GreekFallback", // Ensures that greek letters render consistently
   "Calibri",
   '"Gill Sans"',
@@ -31,20 +32,22 @@ const serifStack = [
 
 const palette = {
   primary: {
-    main: '#5f9b65',
+    // Affects <a>
+    main: "#d6193c",
+    dark: "#d6193c"
   },
   secondary: {
-    main: "#5f9b65",
+    main: "#d6193c",
   },
   lwTertiary: {
-    main: "#69886e",
-    dark: "#21672b",
+    main: "#d6193c",
+    dark: "#d6193c",
   },
   error: {
     main: deepOrange[900],
   },
   background: {
-    default: "#f8f8f8",
+    default: "#f6f8f9",
   },
   event: "#2b6a99",
   group: "#588f27",
@@ -54,12 +57,15 @@ const palette = {
 const theme = createLWTheme({
   palette: palette,
   typography: {
+    fontDownloads: [
+      "https://fonts.googleapis.com/css?family=Lato:300,400,500",
+    ],
     fontFamily: sansSerifStack,
     postStyle: {
-      fontFamily: serifStack,
+      fontFamily: sansSerifStack,
     },
     headerStyle: {
-      fontFamily: serifStack,
+      fontFamily: sansSerifStack,
     },
     caption: {
       // captions should be relative to their surrounding content, so they are unopinionated about fontFamily and use ems instead of rems
@@ -93,7 +99,7 @@ const theme = createLWTheme({
   overrides: {
     MuiAppBar: {
       colorDefault: {
-        backgroundColor: "#fbfbfb",
+        backgroundColor: "white",
       },
     },
     PostsVote: {
