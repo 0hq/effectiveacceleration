@@ -441,12 +441,6 @@ export const menuTabs: ForumOptions<Array<MenuTab>> = {
       subItem: true,
     },
     {
-      id: "shortform",
-      title: "Shortform",
-      link: "/shortform",
-      subItem: true,
-    },
-    {
       id: "subscribeWidget",
       customComponentName: "SubscribeWidget",
     },
