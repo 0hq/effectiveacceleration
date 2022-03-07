@@ -256,7 +256,7 @@ class CommunityMapFilter extends Component<CommunityMapFilterProps,CommunityMapF
     const isAdmin = userIsAdmin(currentUser);
 
     return <Paper>
-        {!isEAForum && <div className={classes.filters}>
+        {forumTypeSetting.get() === "LessWrong" && <div className={classes.filters}>
           {availableFilters.map((value, i) => {
             const checked = this.state.filters.includes(value)
             return <span 
