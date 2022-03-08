@@ -33,15 +33,15 @@ const serifStack = [
 const palette = {
   primary: {
     // Affects <a>
-    main: "#d6193c",
-    dark: "#d6193c"
+    main: "#C03A44",
+    dark: "#C03A44",
   },
   secondary: {
-    main: "#d6193c",
+    main: "#C03A44",
   },
   lwTertiary: {
-    main: "#d6193c",
-    dark: "#d6193c",
+    main: "#C03A44",
+    dark: "#C03A44",
   },
   error: {
     main: deepOrange[900],
