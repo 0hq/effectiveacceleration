@@ -9,7 +9,7 @@ const styles = (theme: ThemeType): JssStyles => ({
     display: 'inline',
   },
   authorName: {
-    fontWeight: 600,
+    fontWeight: 500,
     marginLeft: forumTypeSetting.get() === 'EAForum' ? 1 : 0,
   },
 })

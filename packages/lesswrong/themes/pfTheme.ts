@@ -3,7 +3,7 @@ import grey from "@material-ui/core/colors/grey";
 import deepOrange from "@material-ui/core/colors/deepOrange";
 
 const sansSerifStack = [
-  "Lato",
+  "Merriweather Sans",
   "GreekFallback", // Ensures that greek letters render consistently
   "Calibri",
   '"Gill Sans"',
@@ -58,7 +58,7 @@ const theme = createLWTheme({
   palette: palette,
   typography: {
     fontDownloads: [
-      "https://fonts.googleapis.com/css?family=Lato:300,400,500",
+      "https://fonts.googleapis.com/css?family=Merriweather+Sans:300,400,500",
     ],
     fontFamily: sansSerifStack,
     postStyle: {
@@ -83,17 +83,17 @@ const theme = createLWTheme({
       fontFamily: sansSerifStack,
     },
     headline: {
-      fontFamily: serifStack,
+      fontFamily: sansSerifStack,
     },
     subheading: {
-      fontFamily: serifStack,
+      fontFamily: sansSerifStack,
     },
     title: {
-      fontFamily: serifStack,
+      fontFamily: sansSerifStack,
       fontWeight: 500,
     },
     uiSecondary: {
-      fontFamily: serifStack,
+      fontFamily: sansSerifStack,
     },
   },
   overrides: {
