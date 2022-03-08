@@ -58,7 +58,7 @@ const theme = createLWTheme({
   palette: palette,
   typography: {
     fontDownloads: [
-      "https://fonts.googleapis.com/css?family=Merriweather+Sans:300,400,500",
+      "https://fonts.googleapis.com/css?family=Merriweather+Sans:300,400,500,600",
     ],
     fontFamily: sansSerifStack,
     postStyle: {
