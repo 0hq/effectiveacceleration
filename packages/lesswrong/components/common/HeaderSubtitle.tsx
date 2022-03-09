@@ -10,6 +10,7 @@ export const styles = (theme: ThemeType): JssStyles => ({
     paddingLeft: '1em',
     textTransform: 'uppercase',
     borderLeft: `1px solid ${grey[400]}`,
+    ...theme.typography.postStyle,
   },
 });
 
