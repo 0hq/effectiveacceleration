@@ -21,6 +21,7 @@ const sansSerifStack = [
 ].join(",");
 
 const serifStack = [
+  "Source Serif Pro",
   "warnock-pro",
   "Palatino",
   '"Palatino Linotype"',
@@ -59,13 +60,14 @@ const theme = createLWTheme({
   typography: {
     fontDownloads: [
       "https://fonts.googleapis.com/css?family=Mukta:300,400,500,600",
+      "https://fonts.googleapis.com/css?family=Source+Serif+Pro:300,400,500,600",
     ],
     fontFamily: sansSerifStack,
     postStyle: {
       fontFamily: sansSerifStack,
     },
     headerStyle: {
-      fontFamily: sansSerifStack,
+      fontFamily: serifStack,
     },
     caption: {
       // captions should be relative to their surrounding content, so they are unopinionated about fontFamily and use ems instead of rems
@@ -83,13 +85,13 @@ const theme = createLWTheme({
       fontFamily: sansSerifStack,
     },
     headline: {
-      fontFamily: sansSerifStack,
+      fontFamily: serifStack,
     },
     subheading: {
       fontFamily: sansSerifStack,
     },
     title: {
-      fontFamily: sansSerifStack,
+      fontFamily: serifStack,
       fontWeight: 500,
     },
     uiSecondary: {
