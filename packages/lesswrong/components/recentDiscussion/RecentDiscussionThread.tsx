@@ -94,7 +94,7 @@ const styles = (theme: ThemeType): JssStyles => ({
   },
   title: {
     ...theme.typography.display2,
-    ...theme.typography.postStyle,
+    ...theme.typography.headerStyle,
     flexGrow: 1,
     marginTop: 0,
     marginBottom: 8,
