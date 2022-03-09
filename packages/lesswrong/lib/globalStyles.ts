@@ -7,7 +7,7 @@ export const commentsNodeRootMarginBottom = 17
 
 const clearStyle = (theme: ThemeType): JssStyles => ({
   html: {
-    fontSize: 12,
+    fontSize: 13,
     boxSizing: "border-box",
     "-webkit-font-smoothing": "antialiased",
     "-moz-osx-font-smoothing": "grayscale",

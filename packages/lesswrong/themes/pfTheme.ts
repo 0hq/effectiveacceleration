@@ -3,7 +3,7 @@ import grey from "@material-ui/core/colors/grey";
 import deepOrange from "@material-ui/core/colors/deepOrange";
 
 const sansSerifStack = [
-  "Merriweather Sans",
+  "Mukta",
   "GreekFallback", // Ensures that greek letters render consistently
   "Calibri",
   '"Gill Sans"',
@@ -58,7 +58,7 @@ const theme = createLWTheme({
   palette: palette,
   typography: {
     fontDownloads: [
-      "https://fonts.googleapis.com/css?family=Merriweather+Sans:300,400,500,600",
+      "https://fonts.googleapis.com/css?family=Mukta:300,400,500,600",
     ],
     fontFamily: sansSerifStack,
     postStyle: {
