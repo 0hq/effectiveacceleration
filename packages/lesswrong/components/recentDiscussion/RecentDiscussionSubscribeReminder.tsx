@@ -43,8 +43,7 @@ const styles = (theme: ThemeType): JssStyles => ({
     maxWidth: 252,
   },
   message: {
-    display: "flex",
-    alignItems: "flex-start",
+    textAlign: "center",
     fontSize: 18,
     lineHeight: 1.75,
   },
@@ -94,7 +93,7 @@ const RecentDiscussionSubscribeReminder = ({classes}: {
   const [loading, setLoading] = useState(false);
   const { flash } = useMessages();
   const {WrappedLoginForm, SignupSubscribeToCurated, Loading, AnalyticsInViewTracker } = Components;
-  const subscriptionDescription = '(2-3 posts per week, selected by the LessWrong moderation team.)';
+  const subscriptionDescription = '';
   const { captureEvent } = useTracking({eventProps: {pageElementContext: "subscribeReminder"}});
   
   // Show admins a random version of the widget. Makes sure we notice if it's intrusive/bad.
@@ -203,7 +202,7 @@ const RecentDiscussionSubscribeReminder = ({classes}: {
       </div>
     </>
   );
-  
+
   if (loading) {
     return <div className={classes.root}>
       <Loading/>

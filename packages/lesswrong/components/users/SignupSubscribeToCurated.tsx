@@ -52,7 +52,7 @@ const SignupSubscribeToCurated = ({ defaultValue, onChange, classes }: {
     />
     Subscribe to {emailType}
     {forumTypeSetting.get() !== 'EAForum' && (
-      <Tooltip title="Emails 2-3 times per week with the best posts, chosen by the LessWrong moderation team.">
+      <Tooltip title="Emails 2-3 times per week with the best posts.">
         <Info className={classes.infoIcon}/>
       </Tooltip>
     )}

@@ -400,8 +400,8 @@ export const menuTabs: ForumOptions<Array<MenuTab>> = {
     },
     {
       id: "events",
-      title: "Community and Events",
-      mobileTitle: "Events",
+      title: "Community",
+      mobileTitle: "Community",
       link: communityPath,
       iconComponent: SupervisedUserCircleIcon,
       tooltip: "See groups and events in your area",
@@ -418,7 +418,7 @@ export const menuTabs: ForumOptions<Array<MenuTab>> = {
       link: "/allPosts",
       iconComponent: Sort,
       tooltip: "See all posts, filtered and sorted by date, karma, and more",
-      showOnMobileStandalone: false,
+      showOnMobileStandalone: true,
       showOnCompressed: true,
     },
     {
