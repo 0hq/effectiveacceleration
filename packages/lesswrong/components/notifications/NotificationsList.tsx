@@ -12,7 +12,8 @@ const styles = (theme: ThemeType): JssStyles => ({
   },
   
   empty: {
-    padding: 10
+    padding: 10,
+    ...theme.typography.postStyle,
   },
   
   loadMoreButton: {
