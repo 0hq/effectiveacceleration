@@ -37,7 +37,8 @@ const styles = (theme: ThemeType): JssStyles => ({
     height: 32,
     marginTop: 16,
     cursor: 'pointer',
-    fontSize: '1rem'
+    fontSize: '1rem',
+    backgroundColor: 'rgba(0,0,0,0.10)',
   }, 
   error: {
     padding: 8,
