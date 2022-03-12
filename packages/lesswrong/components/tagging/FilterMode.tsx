@@ -15,8 +15,9 @@ import { useCurrentUser } from '../common/withUser';
 
 export const filteringStyles = (theme: ThemeType) => ({
   paddingLeft: 16,
-  paddingTop: 12,
+  paddingTop: 18,
   paddingRight: 16,
+  paddingBottom: 16,
   width: 500,
   marginBottom: -4,
   ...theme.typography.commentStyle,
