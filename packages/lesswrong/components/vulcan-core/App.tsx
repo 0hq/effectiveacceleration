@@ -12,7 +12,7 @@ import { userIdentifiedCallback } from '../../lib/analyticsEvents';
 import { MessageContext } from '../common/withMessages';
 import type { RouterLocation } from '../../lib/vulcan-lib/routes';
 
-const siteImageSetting = new DatabasePublicSetting<string | null>('siteImage', 'https://res.cloudinary.com/lesswrong-2-0/image/upload/v1503704344/sequencesgrid/h6vrwdypijqgsop7xwa0.jpg') // An image used to represent the site on social media
+const siteImageSetting = new DatabasePublicSetting<string | null>('siteImage', "https://res.cloudinary.com/progress-forum/image/upload/v1647499492/media/externalthumbnail.png") // An image used to represent the site on social media
 
 interface ExternalProps {
   apolloClient: any
