@@ -8,7 +8,7 @@ import { forumTitleSetting } from '../../lib/instanceSettings';
 
 const styles = (theme: ThemeType): JssStyles => ({
   root: {
-    height: 32
+    height: 31
   }
 })
 

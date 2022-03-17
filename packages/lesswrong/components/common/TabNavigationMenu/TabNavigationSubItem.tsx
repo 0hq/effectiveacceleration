@@ -10,7 +10,7 @@ const styles = (theme: ThemeType): JssStyles => ({
     display: "block",
     paddingBottom: theme.spacing.unit,
     // padding reflects how large an icon+padding is
-    paddingLeft: (theme.spacing.unit*2) + (iconWidth + (theme.spacing.unit*2)),
+    paddingLeft: (theme.spacing.unit*2) + (iconWidth + (theme.spacing.unit*2.5)),
     color: theme.palette.grey[700],
     width: 
       TAB_NAVIGATION_MENU_WIDTH - // base width

@@ -74,7 +74,7 @@ const styles = (theme: ThemeType): JssStyles => ({
     marginRight: theme.spacing.unit,
   },
   siteLogo: {
-    marginLeft: -theme.spacing.unit * 1.5,
+    marginLeft: -theme.spacing.unit,
   },
   hideLgUp: {
     [theme.breakpoints.up('lg')]: {

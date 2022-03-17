@@ -8,6 +8,7 @@ import { BookIcon } from "../../icons/bookIcon";
 import { allPostsIcon } from "../../icons/allPostsIcon";
 
 import Home from "@material-ui/icons/Home";
+import LibraryBooksIcon from "@material-ui/icons/LibraryBooks";
 import LocalOffer from "@material-ui/icons/LocalOffer";
 import Sort from "@material-ui/icons/Sort";
 import Info from "@material-ui/icons/Info";
@@ -384,7 +385,7 @@ export const menuTabs: ForumOptions<Array<MenuTab>> = {
       id: "home",
       title: "Home",
       link: "/",
-      iconComponent: Home,
+      iconComponent: LibraryBooksIcon,
       tooltip: "See recent posts on strategies for doing the most good, plus recent activity from all across the Forum",
       showOnMobileStandalone: true,
       showOnCompressed: true,

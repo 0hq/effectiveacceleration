@@ -104,6 +104,20 @@ const theme = createLWTheme({
         backgroundColor: "white",
       },
     },
+
+/*     MuiToolbar: {
+      gutters: {
+        '@media (min-width: 600px)': {
+          paddingLeft: 16,
+          paddingRight: 16,
+        },
+        '@media (max-width: 599px)': {
+          paddingLeft: 8,
+          paddingRight: 8,
+        },
+      },
+    }, */
+
     PostsVote: {
       voteScores: {
         margin: "25% 15% 15% 15%",

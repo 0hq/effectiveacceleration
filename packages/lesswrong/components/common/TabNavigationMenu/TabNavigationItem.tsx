@@ -25,7 +25,7 @@ const styles = (theme: ThemeType): JssStyles => ({
     },
     paddingTop: theme.spacing.unit*2,
     paddingBottom: theme.spacing.unit*2,
-    paddingLeft: theme.spacing.unit*2,
+    paddingLeft: theme.spacing.unit*3.5,
     paddingRight: theme.spacing.unit*2,
     display: "flex",
     alignItems: "center",
@@ -45,7 +45,7 @@ const styles = (theme: ThemeType): JssStyles => ({
     opacity: .3,
     width: iconWidth,
     height: 28,
-    marginRight: theme.spacing.unit*2,
+    marginRight: theme.spacing.unit*1,
     display: "inline",
   },
   navText: {
