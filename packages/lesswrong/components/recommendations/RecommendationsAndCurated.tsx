@@ -144,7 +144,7 @@ const RecommendationsAndCurated = ({
           onChange={(newSettings) => setSettings(newSettings)}
         /> }
 
-      {!currentUser && forumTypeSetting.get() !== 'EAForum' && <div>
+      {!currentUser && forumTypeSetting.get() === 'LessWrong' && <div>
         <div className={classes.largeScreenLoggedOutSequences}>
           <SequencesGridWrapper
             terms={{'view':'curatedSequences', limit:3}}
