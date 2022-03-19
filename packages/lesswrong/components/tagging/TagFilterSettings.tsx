@@ -66,6 +66,16 @@ const personalBlogpostInfo: ForumOptions<{name: string, tooltip: JSX.Element}> =
       </div>
     </div>
   },
+  ProgressForum: {
+    name: 'Personal',
+    tooltip: <div>
+      <div>
+        By default the homepage only displays Frontpage posts—posts that are broadly Progress Studies-related.
+        Personal posts are those which either don't fall under the Progress Studies ambit, or posts where the
+        author desires less visibility.
+      </div>
+    </div>
+  },
   default: {
     name: 'Personal',
     tooltip: <div>
