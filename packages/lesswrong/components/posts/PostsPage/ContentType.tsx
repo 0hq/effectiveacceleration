@@ -214,14 +214,9 @@ export const contentTypes: ForumOptions<Record<ContentTypeString,ContentTypeSett
     frontpage: {
       tooltipTitle: 'Frontpage Post',
       tooltipBody: <React.Fragment>
-        <p><b>Frontpage Posts</b> are promoted by moderators based on:</p>
-        <ul>
-          <li>Usefulness, novelty, relevance</li>
-          <li>Timeless content (minimizing reference to current events)</li>
-          <li>Aiming to explain, rather than persuade</li>
-        </ul>
+        <p><b>Frontpage Posts</b> are those which are broadly Progress Studies-relevant.</p>
       </React.Fragment>,
-      linkTarget: "/posts/TODO",
+      linkTarget: "/",
       Icon: HomeIcon
     },
     personal: {
@@ -234,12 +229,12 @@ export const contentTypes: ForumOptions<Record<ContentTypeString,ContentTypeSett
         </div>
         <ul>
           <li>Niche topics</li>
-          <li>Meta-discussion of LessWrong (site features, interpersonal community dynamics)</li>
+          <li>Meta-discussion of the Progress Forum (site features, interpersonal community dynamics)</li>
           <li>Topics that are difficult to discuss rationally</li>
           <li>Personal ramblings</li>
         </ul>
       </React.Fragment>,
-      linkTarget: "/posts/TODO",
+      linkTarget: "/",
       Icon: PersonIcon
     },
     curated: {
