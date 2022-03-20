@@ -73,6 +73,24 @@ const FILTERS_ALL: ForumOptions<Partial<Record<Filters, {label: string, tooltip:
       tooltip: "Events from around the world."
     },
   },
+  "ProgressForum": {
+     all: {
+      label: "All Posts",
+      tooltip: "Includes personal blogposts as well as frontpage, questions, and community posts."
+    },
+    frontpage: {
+      label: "Frontpage",
+      tooltip: "Posts that are broadly Progress Studies-relevant."
+    },
+    questions: {
+      label: "Questions",
+      tooltip: "Open questions and answers."
+    },
+    events: {
+      label: "Events",
+      tooltip: "Events from around the world."
+    },
+  },
   "default": {
     all: {
       label: "All Posts",
