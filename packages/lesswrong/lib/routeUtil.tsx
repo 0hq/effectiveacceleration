@@ -149,6 +149,13 @@ const forumDomainWhitelist: ForumOptions<Array<string>> = {
     'localhost:3000',
     'localhost:8300'
   ],
+  ProgressForum: [
+    'progressforum.org',
+    'beta.progressforum.org',
+    'localhost:3000',
+    'localhost:3001',
+    'localhost:8300',
+  ],
   default: [
     'localhost:3000',
     'localhost:8300',
