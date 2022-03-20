@@ -814,7 +814,9 @@ const forumSpecificRoutes = forumSelect<Route[]>({
       name:'about',
       path:'/about',
       componentName: 'PostsSingleRoute',
-      _id: aboutPostIdSetting.get()
+      _id: aboutPostIdSetting.get(),
+      getPingback: async (parsedUrl) => await getPostPingbackById(parsedUrl, aboutPostIdSetting.get()),
+      background: postBackground
     },
     {
       name: 'faq',
@@ -843,7 +845,7 @@ const forumSpecificRoutes = forumSelect<Route[]>({
       name:'home',
       path:'/',
       componentName: 'Home2',
-      sunshineSidebar: true //TODO: remove this in production?
+      sunshineSidebar: true
     },
     {
       name:'about',
