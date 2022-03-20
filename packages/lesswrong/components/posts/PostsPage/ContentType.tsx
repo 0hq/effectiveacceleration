@@ -240,8 +240,7 @@ export const contentTypes: ForumOptions<Record<ContentTypeString,ContentTypeSett
     curated: {
       tooltipTitle: 'Curated Post',
       tooltipBody: <div>
-        The best 2-3 posts each week, selected by the moderation team. Curated
-        posts are featured at the top of the front page and emailed to subscribers.
+        The best posts, selected by the moderation team.
       </div>,
       linkTarget: curatedUrl,
       Icon: StarIcon,
