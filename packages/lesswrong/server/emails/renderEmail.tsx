@@ -205,7 +205,7 @@ export async function generateEmail({user, to, from, subject, bodyComponent, boi
   if (!sitename) {
     throw new Error("No site name configured. Make sure \"title\" is set in your settings.json.");
   }
-  const taggedSubject = `[${sitename}] ${subject}`;
+  const taggedSubject = `${subject}`;
   
   return {
     user,
