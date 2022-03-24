@@ -138,6 +138,7 @@ const createLWTheme = (theme: ThemeType) => {
       },
       display1: {
         color: grey[800],
+        // color: theme.palette.primary.main,
         fontSize: '2rem',
         marginTop: '1em'
       },
@@ -169,21 +170,22 @@ const createLWTheme = (theme: ThemeType) => {
       },
       blockquote: {
         fontWeight: 400,
-        paddingTop: spacingUnit*2,
+        paddingTop: spacingUnit*1.5,
         paddingRight: spacingUnit*2,
-        paddingBottom: spacingUnit*2,
+        paddingBottom: spacingUnit*1.5,
         paddingLeft: spacingUnit*2,
         borderLeft: `solid 3px ${grey[300]}`,
-        margin: 0,
+        // margin: 0,
+        marginLeft: spacingUnit*3,
       },
       commentBlockquote: {
         fontWeight: 400,
-        paddingTop: spacingUnit,
-        paddingRight: spacingUnit*3,
-        paddingBottom: spacingUnit,
-        paddingLeft: spacingUnit*2,
+        paddingTop: spacingUnit*1,
+        paddingRight: spacingUnit*1.5,
+        paddingBottom: spacingUnit*1,
+        paddingLeft: spacingUnit*1.5,
         borderLeft: `solid 3px ${grey[300]}`,
-        margin: 0,
+        // margin: 0,
         marginLeft: spacingUnit*1.5,
       },
       codeblock: {
