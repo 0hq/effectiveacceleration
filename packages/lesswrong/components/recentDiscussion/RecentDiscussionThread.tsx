@@ -67,9 +67,10 @@ const styles = (theme: ThemeType): JssStyles => ({
     opacity: 0,
   },
   content :{
-    marginLeft: 4,
-    marginRight: 4,
-    paddingBottom: 1
+    marginTop: 16,
+    marginLeft: 8,
+    marginRight: 20,
+    paddingBottom: 12,
   },
   commentsList: {
     marginTop: 12,
@@ -82,12 +83,13 @@ const styles = (theme: ThemeType): JssStyles => ({
     }
   },
   post: {
-    paddingTop: 18,
-    paddingLeft: 16,
-    paddingRight: 16,
+    paddingTop: 20,
+    // paddingBottom: 20,
+    paddingLeft: 20,
+    paddingRight: 20,
     background: "white",
     borderRadius: 3,
-    marginBottom:4
+    // marginBottom: 4,
   },
   titleAndActions: {
     display: "flex",
