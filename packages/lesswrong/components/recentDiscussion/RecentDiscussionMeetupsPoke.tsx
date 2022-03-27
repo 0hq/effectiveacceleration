@@ -9,6 +9,7 @@ import Checkbox from '@material-ui/core/Checkbox';
 import Input from '@material-ui/core/Input';
 import Geosuggest from 'react-geosuggest';
 import { pickBestReverseGeocodingResult } from '../../server/mapsUtils';
+import { forumSelect } from '../../lib/forumTypeUtils';
 
 const styles = (theme: ThemeType): JssStyles => ({
   root: {
@@ -160,9 +161,16 @@ const RecentDiscussionMeetupsPoke = ({classes}: {
   
   if (hidden)
     return null;
+
+  const forumName = forumSelect({
+    LessWrong: 'LessWrong',
+    EAForum: 'Effective Altruism',
+    ProgressForum: 'Progress Studies',
+    default: '',
+  })
   
   return <div className={classes.root}>
-    <div>Did you know that there are LessWrong meetups? To get email notification
+    <div>Did you know that there are {forumName} meetups? To get email notification
     of meetups near you, enter your location:</div>
     
     <div>
