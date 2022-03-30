@@ -350,7 +350,11 @@ addRoute(
     name: 'allTags',
     path: '/tags/all',
     componentName: 'AllTagsPage',
-    title: forumTypeSetting.get() === 'EAForum' ? "The EA Forum Wiki" : "Concepts Portal",
+    title: forumSelect({
+      EAForum: 'The EA Forum Wiki',
+      ProgressForum: 'Progress Forum Wiki',
+      default: 'Concepts Portal',
+    })
   },
   {
     name: "TagsAll",
