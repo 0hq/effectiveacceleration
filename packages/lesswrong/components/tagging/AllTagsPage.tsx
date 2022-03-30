@@ -10,6 +10,7 @@ import { Link } from '../../lib/reactRouterWrapper';
 import AddBoxIcon from '@material-ui/icons/AddBox';
 import { useDialog } from '../common/withDialog';
 import { forumTypeSetting } from '../../lib/instanceSettings';
+import { forumSelect } from '../../lib/forumTypeUtils';
 
 const styles = (theme: ThemeType): JssStyles => ({
   root: {
@@ -64,12 +65,18 @@ const AllTagsPage = ({classes}: {
 
   const { AllTagsAlphabetical, SectionButton, SectionTitle, ContentItemBody } = Components;
 
+  const wikiTitle = forumSelect({
+    ProgressForum: 'Progress Forum Wiki',
+    EAForum: 'EA Forum Wiki',
+    default: 'Concepts Portal'
+  })
+
   return (
     <AnalyticsContext pageContext="allTagsPage">
       <div className={classes.root}>
         <div className={classes.topSection}>
           <AnalyticsContext pageSectionContext="tagPortal">
-            <SectionTitle title={forumTypeSetting.get() === 'EAForum' ? 'EA Forum Wiki' : 'Concepts Portal'}>
+            <SectionTitle title={wikiTitle}>
               <SectionButton>
                 {currentUser
                   ? <Link to="/tag/create">
