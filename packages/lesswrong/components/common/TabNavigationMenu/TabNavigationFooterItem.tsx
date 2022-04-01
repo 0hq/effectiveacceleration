@@ -21,7 +21,7 @@ const styles = (theme: ThemeType): JssStyles => ({
   },
   navButton: {
     paddingTop: theme.spacing.unit,
-    paddingBottom: 2,
+    paddingBottom: 6,
     paddingLeft: theme.spacing.unit,
     paddingRight: theme.spacing.unit,
     width: "100%",
