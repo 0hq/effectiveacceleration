@@ -135,3 +135,6 @@ import './server/styleGeneration';
 import './server/search/utils';
 import './server/search/callbacks';
 import './server/search/algoliaCron';
+
+// Telemetry
+import './server/analytics/telemetry';

@@ -24,6 +24,7 @@ import { createMutator } from '../vulcan-lib/mutators';
 import { UnsubscribeAllToken } from '../emails/emailTokens';
 import { userGetEmail } from '../../lib/vulcan-users/helpers';
 import { captureException } from '@sentry/core';
+import { forumSelect } from '../../lib/forumTypeUtils';
 
 export interface RenderedEmail {
   user: DbUser | null,
@@ -39,6 +40,13 @@ const plainTextWordWrap = 80;
 
 // Doctype string at the header of HTML emails
 export const emailDoctype = '<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">';
+
+const emailLinkColor = forumSelect({
+  LessWrong: '#5f9b65',
+  EAForum: '#0C869B',
+  ProgressForum: '#C03A44',
+  default: '#5f9b65',
+})
 
 // Global email CSS, inherited from Vulcan-Starter. Some of this is about
 // handling the top-level table layout; some of it looks like workarounds for
@@ -74,7 +82,7 @@ const emailGlobalCss = `
   
   /* Global styles that apply eg inside of posts */
   a {
-    color: ${forumTypeSetting.get() === 'EAForum' ? '#0C869B' : '#5f9b65'}
+    color: ${emailLinkColor};
   }
   blockquote {
     border-left: solid 3px #e0e0e0;
