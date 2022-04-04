@@ -12,11 +12,17 @@ const styles = (theme: ThemeType): JssStyles => ({
   }
 })
 
-const SiteLogo = ({classes}) => {
-  if (!getLogoUrl()) return null
+const SiteLogo = ({classes, mobileLoggedIn}: {classes: any, mobileLoggedIn?: boolean}) => {
+  let logoUrl = getLogoUrl();
+
+  if (!logoUrl) return null
+  if (mobileLoggedIn) {
+    logoUrl = "https://res.cloudinary.com/progress-forum/image/upload/v1646919986/media/logo-mobile.svg";
+  }
+
   return <img
     className={classes.root}
-    src={getLogoUrl()}
+    src={logoUrl}
     title={forumTitleSetting.get()}
     alt={`${forumTitleSetting.get()} Logo`}
   />

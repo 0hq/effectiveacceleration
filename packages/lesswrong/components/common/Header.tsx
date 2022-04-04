@@ -286,7 +286,7 @@ const Header = ({standaloneNavigationPresent, toggleStandaloneNavigation, toc, s
                 </div>
                 <div className={classes.hideMdUp}>
                   <Link to="/" className={classes.titleLink}>
-                    {hasLogo && <div className={classes.siteLogo}><Components.SiteLogo/></div>}
+                    {hasLogo && <div className={classes.siteLogo}><Components.SiteLogo mobileLoggedIn={currentUser !== null}></Components.SiteLogo></div>}
                   </Link>
                 </div>
               </Typography>
