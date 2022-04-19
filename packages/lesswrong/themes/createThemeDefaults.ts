@@ -61,8 +61,8 @@ const createLWTheme = (theme: ThemeType) => {
   // cleanly overriden
 
   const body1FontSize = {
-    fontSize: '1.4rem',
-    lineHeight: '2rem'
+    fontSize: '1.35rem',
+    lineHeight: '2.05rem'
   }
 
   const body2FontSize = {
