@@ -44,8 +44,9 @@ const styles = (theme: ThemeType): JssStyles => ({
   root: {
     width: POST_PREVIEW_WIDTH,
     position: "relative",
-    padding: theme.spacing.unit*1.5,
-    paddingBottom: 0,
+    padding: theme.spacing.unit*2,
+    paddingBottom: theme.spacing.unit*0.75,
+    borderRadius: 3,
     '& img': {
       maxHeight: "200px"
     },
