@@ -17,8 +17,11 @@ const PFLibraryHome = ({ classes }) => {
   return (
     <AnalyticsContext pageContext="eaSequencesHome">
       <SingleColumnSection>
-        <SectionTitle title="Core Reading" />
-        <CoreReading />
+        <Typography variant='body1' className={classes.description}>
+          Under construction!
+        </Typography>
+        {/* <SectionTitle title="Core Reading" /> */}
+        {/* <CoreReading /> */}
         {/* TODO: Reinstate once there are posted sequences. */}
         {/* <SectionTitle  title="Sequences" >
         <SequencesNewButton />
