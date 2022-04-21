@@ -60,8 +60,6 @@ class SmallMapPreview extends Component<SmallMapPreviewProps,SmallMapPreviewStat
     const { post, group, classes } = this.props
     const { viewport } = this.state
 
-    const isEAForum = forumTypeSetting.get() === 'EAForum';
-
     return <div className={classes.previewWrapper}>
       <Helmet> 
         <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v1.3.1/mapbox-gl.css' rel='stylesheet' />
@@ -70,7 +68,7 @@ class SmallMapPreview extends Component<SmallMapPreviewProps,SmallMapPreviewStat
         {...viewport}
         width="100%"
         height="100%"
-        mapStyle={isEAForum ? undefined : "mapbox://styles/habryka/cilory317001r9mkmkcnvp2ra"}
+        mapStyle={forumTypeSetting.get() === 'LessWrong' ? "mapbox://styles/habryka/cilory317001r9mkmkcnvp2ra" : undefined}
         onViewportChange={viewport => this.setState({ viewport })}
         mapboxApiAccessToken={mapboxAPIKeySetting.get()}
       >
