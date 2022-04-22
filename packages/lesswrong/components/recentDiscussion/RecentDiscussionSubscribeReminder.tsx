@@ -188,6 +188,7 @@ const RecentDiscussionSubscribeReminder = ({classes}: {
   }
   
   // the EA Forum uses this prompt in most cases
+  // TODO: Initialize a `forumSelect()`-able subscription prompt
   const eaForumSubscribePrompt = (
     <>
       <div className={classes.message}>
@@ -325,7 +326,7 @@ const RecentDiscussionSubscribeReminder = ({classes}: {
     // verified) resends the verification email.
     const subscribeTextNode = forumTypeSetting.get() === 'EAForum' ? eaForumSubscribePrompt : (
       <div className={classes.message}>
-        Subscribe to get the best of LessWrong emailed to you. {subscriptionDescription}
+        Subscribe to get the best of the Progress Forum emailed to you. {subscriptionDescription}
       </div>
     );
     return <AnalyticsWrapper branch="logged-in-not-subscribed">
