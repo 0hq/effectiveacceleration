@@ -5,6 +5,10 @@ import { getCollectionHooks } from '../mutationCallbacks';
 import { getSiteUrl } from '../vulcan-lib';
 
 getCollectionHooks("Posts").newAsync.add(async (post: DbPost, user: DbUser) => {
+  if (post.draft) {
+    return;
+  }
+
   const toAddress = "developers+telemetry@progressforum.org";
   const fromAddress = "Progress Forum Telemetry <telemetry@progressforum.org>";
   const subject = `New post by @${user.username}`;
