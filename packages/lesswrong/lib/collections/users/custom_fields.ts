@@ -646,7 +646,7 @@ addFieldsDict(Users, {
 
   notificationCommentsOnSubscribedPost: {
     label: "Comments on posts I'm subscribed to",
-    ...notificationTypeSettingsField(),
+    ...notificationTypeSettingsField({channel: 'both'}),
   },
   notificationShortformContent: {
     label: "Shortform by users I'm subscribed to",
@@ -654,7 +654,7 @@ addFieldsDict(Users, {
   },
   notificationRepliesToMyComments: {
     label: "Replies to my comments",
-    ...notificationTypeSettingsField(),
+    ...notificationTypeSettingsField({channel: 'both'}),
   },
   notificationRepliesToSubscribedComments: {
     label: "Replies to comments I'm subscribed to",
