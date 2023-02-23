@@ -229,7 +229,7 @@ export const contentTypes: ForumOptions<Record<ContentTypeString,ContentTypeSett
         </div>
         <ul>
           <li>Niche topics</li>
-          <li>Meta-discussion of the Progress Forum (site features, interpersonal community dynamics)</li>
+          <li>Meta-discussion of the Effective Acceleration Forum (site features, interpersonal community dynamics)</li>
           <li>Topics that are difficult to discuss rationally</li>
           <li>Personal ramblings</li>
         </ul>

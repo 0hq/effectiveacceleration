@@ -110,11 +110,11 @@ class SubscribeDialog extends Component<SubscribeDialogProps,SubscribeDialogStat
     super(props);
     this.state = {
       threshold: "30",
-      method: this.props.method,
+      method: "email",
       copiedRSSLink: false,
       subscribedByEmail: false,
       
-      view: (this.props.method === "email" && !this.emailFeedExists(this.props.view)) ? "curated" : this.props.view,
+      view: (!this.emailFeedExists(this.props.view)) ? "curated" : this.props.view,
     };
   }
 
@@ -234,7 +234,7 @@ class SubscribeDialog extends Component<SubscribeDialogProps,SubscribeDialogStat
           className={classes.tabbar}
           fullWidth
         >
-          <Tab label="RSS" key="tabRSS" value="rss" />
+          {/* <Tab label="RSS" key="tabRSS" value="rss" /> */}
           <Tab label="Email" key="tabEmail" value="email" />
         </Tabs>}
 

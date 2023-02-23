@@ -1,17 +1,17 @@
 {
   "public": {
-    "forumType": "ProgressForum",
-    "title": "Progress Forum",
-    "tagline": "The online home for the progress community",
-    "siteNameWithArticle": "Progress Forum",
-    "siteUrl": "https://progressforum.org",
-    "faviconUrl": "https://res.cloudinary.com/progress-forum/image/upload/v1646644987/media/favicon-192.png",
+    "forumType": "Effective Accelerationism",
+    "title": "Effective Accelerationism",
+    "tagline": "The future, today.",
+    "siteNameWithArticle": "Effective Accelerationism",
+    "siteUrl": "https://effectiveacceleration.org",
+    "faviconUrl": "https://www.myfirstnda.com/src/faviconEACC.png",
     "aboutPostId": "TEtG3iiutPA9HTwfE",
     "contactPostId": "FtJcsdqhQF89DNaHB",
     "forumSettings": {
-      "headerTitle": "Progress Forum",
-      "shortForumTitle": "PF",
-      "tabTitle": "Progress Forum"
+      "headerTitle": "Effective Accelerationism",
+      "shortForumTitle": "E/ACC",
+      "tabTitle": "Effective Accelerationism"
     },
     "analytics": {
       "environment": "production"

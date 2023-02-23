@@ -14,7 +14,7 @@ interface SubscribeWidgetState {
 class SubscribeWidget extends Component<SubscribeWidgetProps,SubscribeWidgetState> {
   state: SubscribeWidgetState = {
     dialogOpen: false,
-    method: "",
+    method: "email",
   }
 
   openDialog(method: string) {
@@ -29,7 +29,7 @@ class SubscribeWidget extends Component<SubscribeWidgetProps,SubscribeWidgetStat
     return (
       <div>
         <a onClick={() => this.openDialog("rss")}>
-          <TabNavigationSubItem>Subscribe (RSS{!isEAForum && '/Email'})</TabNavigationSubItem>
+          <TabNavigationSubItem>Subscribe via Email</TabNavigationSubItem>
         </a>
         { dialogOpen && <SubscribeDialog
           open={true}

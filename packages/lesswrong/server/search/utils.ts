@@ -467,7 +467,7 @@ async function deleteIfPresent(algoliaIndex: algoliasearch.Index, ids: Array<str
   }
 }
 
-const algoliaAdminKeySetting = new DatabaseServerSetting<string | null>('algolia.adminKey', null)
+const algoliaAdminKeySetting = new DatabaseServerSetting<string | null>('algolia.adminKey', "d59e9b55d4f7f97652171ae1bb2f0674")
 export function getAlgoliaAdminClient()
 {
   const algoliaAppId = algoliaAppIdSetting.get();

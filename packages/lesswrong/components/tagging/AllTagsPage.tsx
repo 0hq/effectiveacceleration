@@ -66,7 +66,7 @@ const AllTagsPage = ({classes}: {
   const { AllTagsAlphabetical, SectionButton, SectionTitle, ContentItemBody } = Components;
 
   const wikiTitle = forumSelect({
-    ProgressForum: 'Progress Forum Wiki',
+    ProgressForum: 'Effective Acceleration Wiki',
     EAForum: 'EA Forum Wiki',
     default: 'Concepts Portal'
   })

@@ -303,7 +303,7 @@ const RecentDiscussionSubscribeReminder = ({classes}: {
     // activated), and sends a confirmation email (if needed).
     const subscribeTextNode = forumTypeSetting.get() === 'EAForum' ? eaForumSubscribePrompt : (
       <div className={classes.message}>
-        You previously unsubscribed from all emails from the Progress Forum.
+        You previously unsubscribed from all emails from the Effective Acceleration Forum.
         Re-subscribe to get the best posts emailed to you! {subscriptionDescription}
       </div>
     );

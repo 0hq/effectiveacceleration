@@ -51,8 +51,8 @@ export class DatabasePublicSetting<SettingValueType> {
 export const googleTagManagerIdSetting = new DatabasePublicSetting<string | null>('googleTagManager.apiKey', null) // Google Tag Manager ID
 export const reCaptchaSiteKeySetting = new DatabasePublicSetting<string | null>('reCaptcha.apiKey', null) // ReCaptcha API Key
 // Algolia Search Settings
-export const algoliaAppIdSetting = new DatabasePublicSetting<string | null>('algolia.appId', null)
-export const algoliaSearchKeySetting = new DatabasePublicSetting<string | null>('algolia.searchKey', null)
+export const algoliaAppIdSetting = new DatabasePublicSetting<string | null>('algolia.appId', "EO213JH83U")
+export const algoliaSearchKeySetting = new DatabasePublicSetting<string | null>('algolia.searchKey', "1cdaa88528544f2c1cf428ca71865248")
 export const algoliaPrefixSetting = new DatabasePublicSetting<string | null>('algolia.indexPrefix', null)
 
 export const ckEditorUploadUrlSetting = new DatabasePublicSetting<string | null>('ckEditor.uploadUrl', null) // Image Upload URL for CKEditor
@@ -64,7 +64,7 @@ export const cloudinaryCloudNameSetting = new DatabasePublicSetting<string>('clo
 export const forumAllPostsNumDaysSetting = new DatabasePublicSetting<number>('forum.numberOfDays', 10) // Number of days to display in the timeframe view
 
 export const localeSetting = new DatabasePublicSetting<string>('locale', 'en-US')
-export const legacyRouteAcronymSetting = new DatabasePublicSetting<string>('legacyRouteAcronym', 'lw') // Because the EA Forum was identical except for the change from /lw/ to /ea/
+export const legacyRouteAcronymSetting = new DatabasePublicSetting<string>('legacyRouteAcronym', 'ec') // Because the EA Forum was identical except for the change from /lw/ to /ea/
 
 // frontpageFilterSettings default tag filter
 //
@@ -74,14 +74,14 @@ export const legacyRouteAcronymSetting = new DatabasePublicSetting<string>('lega
 // curated, if those ever get refactored into tags.
 export const defaultVisibilityTags = new DatabasePublicSetting<Array<FilterTag>>('defaultVisibilityTags', [])
 
-export const gatherTownRoomId = new DatabasePublicSetting<string | null>("gatherTownRoomId", "aPVfK3G76UukgiHx")
-export const gatherTownRoomName = new DatabasePublicSetting<string | null>("gatherTownRoomName", "lesswrong-campus")
+export const gatherTownRoomId = new DatabasePublicSetting<string | null>("gatherTownRoomId", null)
+export const gatherTownRoomName = new DatabasePublicSetting<string | null>("gatherTownRoomName", null)
 
 // Public elicit settings
 export const elicitSourceURL = new DatabasePublicSetting('elicitSourceURL', 'https://LessWrong.com')
 export const elicitSourceId = new DatabasePublicSetting('elicitSourceId', 'XCjOpumu-')
 
-export const mapboxAPIKeySetting = new DatabasePublicSetting<string | null>('mapbox.apiKey', null) // API Key for the mapbox map and tile requests
+export const mapboxAPIKeySetting = new DatabasePublicSetting<string | null>('mapbox.apiKey', "pk.eyJ1Ijoid2RlcHVlIiwiYSI6ImNsZWdkcno0dDBtMGgzcG5wdWwxZ3ZuZm0ifQ.NaBW0749AwkXqxrfxLorcA") // API Key for the mapbox map and tile requests
 
 export const mailchimpForumDigestListIdSetting = new DatabasePublicSetting<string | null>('mailchimp.forumDigestListId', null)
 export const mailchimpEAForumListIdSetting = new DatabasePublicSetting<string | null>('mailchimp.eaForumListId', null)

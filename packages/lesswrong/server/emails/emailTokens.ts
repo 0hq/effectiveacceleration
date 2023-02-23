@@ -128,7 +128,7 @@ export const UnsubscribeAllToken = new EmailTokenType({
       unset: {},
       validate: false,
     });
-    return {message: "You have been unsubscribed from all emails from the Progress Forum." };
+    return {message: "You have been unsubscribed from all emails from the Effective Acceleration." };
   },
   resultComponentName: "EmailTokenResult",
 });

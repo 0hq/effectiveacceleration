@@ -12,7 +12,7 @@ import { siteUrlSetting } from '../instanceSettings';
 import { DatabasePublicSetting } from '../publicSettings';
 import type { ToCData } from '../../server/tableOfContents';
 
-export const logoUrlSetting = new DatabasePublicSetting<string | null>('logoUrl', null)
+export const logoUrlSetting = new DatabasePublicSetting<string | null>('logoUrl', "https://www.myfirstnda.com/src/faviconEACC.png")
 
 interface UtilsType {
   // In lib/helpers.ts
