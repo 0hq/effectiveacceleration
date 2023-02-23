@@ -280,6 +280,7 @@ const Header = ({standaloneNavigationPresent, toggleStandaloneNavigation, toc, s
                   <div className={classes.titleSubtitleContainer}>
                     <Link to="/" className={classes.titleLink}>
                       {hasLogo && <div className={classes.siteLogo}><Components.SiteLogo/></div>}
+                      {forumHeaderTitleSetting.get()}
                     </Link>
                     <HeaderSubtitle />
                   </div>
@@ -287,6 +288,7 @@ const Header = ({standaloneNavigationPresent, toggleStandaloneNavigation, toc, s
                 <div className={classes.hideMdUp}>
                   <Link to="/" className={classes.titleLink}>
                     {hasLogo && <div className={classes.siteLogo}><Components.SiteLogo mobileLoggedIn={currentUser !== null}></Components.SiteLogo></div>}
+                    {"E/ACC Forum"}
                   </Link>
                 </div>
               </Typography>

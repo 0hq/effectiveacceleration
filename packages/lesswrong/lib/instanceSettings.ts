@@ -109,7 +109,7 @@ export class PublicInstanceSetting<SettingValueType> {
 */
 
 export type ForumTypeString = "LessWrong"|"AlignmentForum"|"EAForum"|"ProgressForum";
-export const forumTypeSetting = new PublicInstanceSetting<ForumTypeString>('forumType', 'LessWrong', 'warning') // What type of Forum is being run, {LessWrong, AlignmentForum, EAForum}
+export const forumTypeSetting = new PublicInstanceSetting<ForumTypeString>('forumType', 'ProgressForum', 'warning') // What type of Forum is being run, {LessWrong, AlignmentForum, EAForum}
 export const forumTitleSetting = new PublicInstanceSetting<string>('title', 'LessWrong', 'warning') // Default title for URLs
 
 // Your site name may be referred to as "The Alignment Forum" or simply "LessWrong". Use this setting to prevent something like "view on Alignment Forum". Leave the article uncapitalized ("the Alignment Forum") and capitalize if necessary.
@@ -118,7 +118,7 @@ export const siteNameWithArticleSetting = new PublicInstanceSetting<string>('sit
 // NB: Now that neither LW nor the EAForum use this setting, it's a matter of
 // time before it falls out of date. Nevertheless, I expect any newly-created
 // forums to use this setting.
-export const hasEventsSetting = new PublicInstanceSetting<boolean>('hasEvents', true, 'optional') // Whether the current connected server has events activated
+export const hasEventsSetting = new PublicInstanceSetting<boolean>('hasEvents', false, 'optional') // Whether the current connected server has events activated
 
 // Sentry settings
 export const sentryUrlSetting = new PublicInstanceSetting<string|null>('sentry.url', null, "warning"); // DSN URL

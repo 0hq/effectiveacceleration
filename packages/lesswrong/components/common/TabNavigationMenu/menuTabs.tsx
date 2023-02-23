@@ -523,6 +523,12 @@ export const menuTabs: ForumOptions<Array<MenuTab>> = {
       showOnCompressed: true,
     },
     {
+      id: "discord",
+      title: "Join the Discord Community",
+      link: "https://discord.gg/5DcfsE4dw2",
+      subItem: true,
+    },
+    {
       id: "contact",
       title: "Contact Us",
       link: "/contact",
