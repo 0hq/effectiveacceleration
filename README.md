@@ -1,4 +1,4 @@
-# Forum Magnum
+# Effective Acceleration Forums
 
 Forum Magnum is the codebase powering [LessWrong](https://lesswrong.com) and the
 [Effective Altruism Forum](https://forum.effectivealtruism.org).
