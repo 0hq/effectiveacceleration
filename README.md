@@ -1,6 +1,6 @@
 # Effective Acceleration Forums
 
-Forum Magnum is the codebase powering [LessWrong](https://lesswrong.com) and the
+The E/ACC forums are based on Forum Magnum, the codebase powering [LessWrong](https://lesswrong.com) and the
 [Effective Altruism Forum](https://forum.effectivealtruism.org).
 
 The team behind LessWrong created this codebase in 2017 as a rewrite of the
