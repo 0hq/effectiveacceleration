@@ -1,6 +1,6 @@
-# Forum Magnum
+# Effective Acceleration Forums
 
-Forum Magnum is the codebase powering [LessWrong](https://lesswrong.com) and the
+The E/ACC forums are based on Forum Magnum, the codebase powering [LessWrong](https://lesswrong.com) and the
 [Effective Altruism Forum](https://forum.effectivealtruism.org).
 
 The team behind LessWrong created this codebase in 2017 as a rewrite of the
@@ -153,20 +153,3 @@ We use [Jest](https://jestjs.io/) for unit testing, and [Cypress](https://www.cy
 * Add custom commands under `./cypress/support/commands.js`, and access them via `cy.commandName()`.
 * Seed data for tests is stored under `./cypress/fixtures`, and can be accessed using `cy.fixture('<filepath>')`. See [here](https://docs.cypress.io/api/commands/fixture) for more.
 * To execute code in a node context, you can create a [task](https://docs.cypress.io/api/commands/task#Syntax) under `./cypress/plugins/index.js`. Tasks are executed using `cy.task('<task-name>', args)`.
-
-### Where to branch off of
-
-Branch off of `master` and submit to `master`. Deploys occur when `master` is
-merged into `ea-deploy` and `lw-deploy`.
-
-## EA Forum-Specific
-
-### \[CEA-Specific] Local Dev Database
-
-The local development database is actually hosted on MongoDB cloud like staging
-and production. There's no reason to host your own database. It's also shared
-with other developers, which means if someone adds a feature which requires
-manual database work, there's no need for you to also do that manual work.
-
-The test user admin credentials are in 1password. You're also welcome to create
-your own admin user.
