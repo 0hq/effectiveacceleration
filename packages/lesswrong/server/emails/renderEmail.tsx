@@ -1,52 +1,53 @@
-import { createGenerateClassName, MuiThemeProvider } from '@material-ui/core/styles';
-import htmlToText from 'html-to-text';
-import Juice from 'juice';
-import { sendEmailSmtp } from './sendEmail';
-import React from 'react';
-import { ApolloProvider } from '@apollo/client';
-import { getDataFromTree } from '@apollo/client/react/ssr';
-import { renderToString } from 'react-dom/server';
-import { SheetsRegistry } from 'react-jss/lib/jss';
-import JssProvider from 'react-jss/lib/JssProvider';
-import { TimezoneContext } from '../../components/common/withTimezone';
-import { UserContext } from '../../components/common/withUser';
-import LWEvents from '../../lib/collections/lwevents/collection';
-import { userEmailAddressIsVerified } from '../../lib/collections/users/helpers';
-import { forumTitleSetting, forumTypeSetting } from '../../lib/instanceSettings';
-import moment from '../../lib/moment-timezone';
-import forumTheme from '../../themes/forumTheme';
-import { DatabaseServerSetting } from '../databaseSettings';
-import StyleValidator from '../vendor/react-html-email/src/StyleValidator';
-import { Components, EmailRenderContext } from '../../lib/vulcan-lib/components';
-import { createClient } from '../vulcan-lib/apollo-ssr/apolloClient';
-import { computeContextFromUser } from '../vulcan-lib/apollo-server/context';
-import { createMutator } from '../vulcan-lib/mutators';
-import { UnsubscribeAllToken } from '../emails/emailTokens';
-import { userGetEmail } from '../../lib/vulcan-users/helpers';
-import { captureException } from '@sentry/core';
-import { forumSelect } from '../../lib/forumTypeUtils';
+import { createGenerateClassName, MuiThemeProvider } from "@material-ui/core/styles";
+import htmlToText from "html-to-text";
+import Juice from "juice";
+import { sendEmailSmtp } from "./sendEmail";
+import React from "react";
+import { ApolloProvider } from "@apollo/client";
+import { getDataFromTree } from "@apollo/client/react/ssr";
+import { renderToString } from "react-dom/server";
+import { SheetsRegistry } from "react-jss/lib/jss";
+import JssProvider from "react-jss/lib/JssProvider";
+import { TimezoneContext } from "../../components/common/withTimezone";
+import { UserContext } from "../../components/common/withUser";
+import LWEvents from "../../lib/collections/lwevents/collection";
+import { userEmailAddressIsVerified } from "../../lib/collections/users/helpers";
+import { forumTitleSetting, forumTypeSetting } from "../../lib/instanceSettings";
+import moment from "../../lib/moment-timezone";
+import forumTheme from "../../themes/forumTheme";
+import { DatabaseServerSetting } from "../databaseSettings";
+import StyleValidator from "../vendor/react-html-email/src/StyleValidator";
+import { Components, EmailRenderContext } from "../../lib/vulcan-lib/components";
+import { createClient } from "../vulcan-lib/apollo-ssr/apolloClient";
+import { computeContextFromUser } from "../vulcan-lib/apollo-server/context";
+import { createMutator } from "../vulcan-lib/mutators";
+import { UnsubscribeAllToken } from "../emails/emailTokens";
+import { userGetEmail } from "../../lib/vulcan-users/helpers";
+import { captureException } from "@sentry/core";
+import { forumSelect } from "../../lib/forumTypeUtils";
 
 export interface RenderedEmail {
-  user: DbUser | null,
-  to: string,
-  from: string,
-  subject: string,
-  html: string,
-  text: string,
+  user: DbUser | null;
+  to: string;
+  from: string;
+  subject: string;
+  html: string;
+  text: string;
 }
 
 // How many characters to wrap the plain-text version of the email to
 const plainTextWordWrap = 80;
 
 // Doctype string at the header of HTML emails
-export const emailDoctype = '<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">';
+export const emailDoctype =
+  '<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">';
 
 const emailLinkColor = forumSelect({
-  LessWrong: '#5f9b65',
-  EAForum: '#0C869B',
-  ProgressForum: '#C03A44',
-  default: '#5f9b65',
-})
+  LessWrong: "#5f9b65",
+  EAForum: "#0C869B",
+  ProgressForum: "#C03A44",
+  default: "#5f9b65",
+});
 
 // Global email CSS, inherited from Vulcan-Starter. Some of this is about
 // handling the top-level table layout; some of it looks like workarounds for
@@ -92,12 +93,7 @@ const emailGlobalCss = `
   }
 `;
 
-function addEmailBoilerplate({ css, title, body }: {
-  css: string,
-  title: string,
-  body: string
-}): string
-{
+function addEmailBoilerplate({ css, title, body }: { css: string; title: string; body: string }): string {
   return `
     <html lang="en">
     <head>
@@ -137,84 +133,88 @@ function addEmailBoilerplate({ css, title, body }: {
 //     limited and inconsistent subset is supported by mail clients
 //
 
-const defaultEmailSetting = new DatabaseServerSetting<string>('defaultEmail', "hello@world.com")
+const defaultEmailSetting = new DatabaseServerSetting<string>("defaultEmail", "forum@effectiveacceleration.org");
 
-export async function generateEmail({user, to, from, subject, bodyComponent, boilerplateGenerator=addEmailBoilerplate}: {
-  user: DbUser | null,
-  to: string,
-  from?: string,
-  subject: string,
-  bodyComponent: React.ReactNode,
-  boilerplateGenerator?: (props: {css:string, title: string, body: string})=>string,
-}): Promise<RenderedEmail>
-{
+export async function generateEmail({
+  user,
+  to,
+  from,
+  subject,
+  bodyComponent,
+  boilerplateGenerator = addEmailBoilerplate,
+}: {
+  user: DbUser | null;
+  to: string;
+  from?: string;
+  subject: string;
+  bodyComponent: React.ReactNode;
+  boilerplateGenerator?: (props: { css: string; title: string; body: string }) => string;
+}): Promise<RenderedEmail> {
   if (!subject) throw new Error("Missing required argument: subject");
   if (!bodyComponent) throw new Error("Missing required argument: bodyComponent");
-  
+
   // Set up Apollo
   const apolloClient = await createClient(await computeContextFromUser(user));
-  
+
   // Wrap the body in Apollo, JSS, and MUI wrappers.
   const sheetsRegistry = new SheetsRegistry();
   const generateClassName = createGenerateClassName({
-    dangerouslyUseGlobalCSS: true
+    dangerouslyUseGlobalCSS: true,
   });
-  
+
   // Use the user's last-used timezone, which is the timezone of their browser
   // the last time they visited the site. Potentially null, if they haven't
   // visited since before that feature was implemented.
-  const timezone = user?.lastUsedTimezone || null
-  
+  const timezone = user?.lastUsedTimezone || null;
+
   const wrappedBodyComponent = (
-    <EmailRenderContext.Provider value={{isEmailRender:true}}>
-    <ApolloProvider client={apolloClient}>
-    <JssProvider registry={sheetsRegistry} generateClassName={generateClassName}>
-    <MuiThemeProvider theme={forumTheme} sheetsManager={new Map()}>
-    <UserContext.Provider value={user as unknown as UsersCurrent | null /*FIXME*/}>
-    <TimezoneContext.Provider value={timezone}>
-      {bodyComponent}
-    </TimezoneContext.Provider>
-    </UserContext.Provider>
-    </MuiThemeProvider>
-    </JssProvider>
-    </ApolloProvider>
+    <EmailRenderContext.Provider value={{ isEmailRender: true }}>
+      <ApolloProvider client={apolloClient}>
+        <JssProvider registry={sheetsRegistry} generateClassName={generateClassName}>
+          <MuiThemeProvider theme={forumTheme} sheetsManager={new Map()}>
+            <UserContext.Provider value={user as unknown as UsersCurrent | null /*FIXME*/}>
+              <TimezoneContext.Provider value={timezone}>{bodyComponent}</TimezoneContext.Provider>
+            </UserContext.Provider>
+          </MuiThemeProvider>
+        </JssProvider>
+      </ApolloProvider>
     </EmailRenderContext.Provider>
   );
-  
+
   // Traverse the tree, running GraphQL queries and expanding the tree
   // accordingly.
   await getDataFromTree(wrappedBodyComponent);
-  
+
   validateSheets(sheetsRegistry);
-  
+
   // Render the REACT tree to an HTML string
   const body = renderToString(wrappedBodyComponent);
-  
+
   // Get JSS styles, which were added to sheetsRegistry as a byproduct of
   // renderToString.
   const css = sheetsRegistry.toString();
-  const html = boilerplateGenerator({ css, body, title:subject })
-  
+  const html = boilerplateGenerator({ css, body, title: subject });
+
   // Since emails can't use <style> tags, only inline styles, use the Juice
   // library to convert accordingly.
   const inlinedHTML = Juice(html, { preserveMediaQueries: true });
-  
+
   // Generate a plain-text representation, based on the React representation
   const plaintext = htmlToText.fromString(html, {
-    wordwrap: plainTextWordWrap
+    wordwrap: plainTextWordWrap,
   });
-  
-  const fromAddress = from || defaultEmailSetting.get()
+
+  const fromAddress = from || defaultEmailSetting.get();
   if (!fromAddress) {
-    throw new Error("No source email address configured. Make sure \"defaultEmail\" is set in your settings.json.");
+    throw new Error('No source email address configured. Make sure "defaultEmail" is set in your settings.json.');
   }
-  
+
   const sitename = forumTitleSetting.get();
   if (!sitename) {
-    throw new Error("No site name configured. Make sure \"title\" is set in your settings.json.");
+    throw new Error('No site name configured. Make sure "title" is set in your settings.json.');
   }
   const taggedSubject = `${subject}`;
-  
+
   return {
     user,
     to,
@@ -222,52 +222,65 @@ export async function generateEmail({user, to, from, subject, bodyComponent, boi
     subject: taggedSubject,
     html: emailDoctype + inlinedHTML,
     text: plaintext,
-  }
+  };
 }
 
-export const wrapAndRenderEmail = async ({user, to, from, subject, body}: {user: DbUser | null, to: string, from?: string, subject: string, body: React.ReactNode}): Promise<RenderedEmail> => {
+export const wrapAndRenderEmail = async ({
+  user,
+  to,
+  from,
+  subject,
+  body,
+}: {
+  user: DbUser | null;
+  to: string;
+  from?: string;
+  subject: string;
+  body: React.ReactNode;
+}): Promise<RenderedEmail> => {
   const unsubscribeAllLink = user ? await UnsubscribeAllToken.generateLink(user._id) : null;
   return await generateEmail({
     user,
     to,
     from,
     subject: subject,
-    bodyComponent: <Components.EmailWrapper
-      unsubscribeAllLink={unsubscribeAllLink}
-    >
-      {body}
-    </Components.EmailWrapper>
+    bodyComponent: <Components.EmailWrapper unsubscribeAllLink={unsubscribeAllLink}>{body}</Components.EmailWrapper>,
   });
-}
+};
 
-export const wrapAndSendEmail = async ({user, to, from, subject, body}: {
-  user: DbUser|null,
-  to?: string,
-  from?: string,
-  subject: string,
-  body: React.ReactNode}
-): Promise<boolean> => {
+export const wrapAndSendEmail = async ({
+  user,
+  to,
+  from,
+  subject,
+  body,
+}: {
+  user: DbUser | null;
+  to?: string;
+  from?: string;
+  subject: string;
+  body: React.ReactNode;
+}): Promise<boolean> => {
   if (!to && !user) throw new Error("No destination email address for logged-out user email");
   const destinationAddress = to || userGetEmail(user!);
   if (!destinationAddress) throw new Error("No destination email address for user email");
-  
+
   try {
     const email = await wrapAndRenderEmail({ user, to: destinationAddress, from, subject, body });
     const succeeded = await sendEmail(email);
-    void logSentEmail(email, user, {succeeded});
+    void logSentEmail(email, user, { succeeded });
     return succeeded;
-  } catch(e) {
+  } catch (e) {
     // eslint-disable-next-line no-console
     console.error(e);
     captureException(e);
     return false;
   }
-}
+};
 
-function validateSheets(sheetsRegistry: SheetsRegistry)
-{
+function validateSheets(sheetsRegistry: SheetsRegistry) {
   let styleValidator = new StyleValidator();
-  
+
   for (let sheet of sheetsRegistry.registry) {
     for (let rule of sheet.rules.index) {
       if (rule.style) {
@@ -277,16 +290,14 @@ function validateSheets(sheetsRegistry: SheetsRegistry)
   }
 }
 
-
-const enableDevelopmentEmailsSetting = new DatabaseServerSetting<boolean>('enableDevelopmentEmails', false)
-export async function sendEmail(renderedEmail: RenderedEmail): Promise<boolean>
-{
-  if (process.env.NODE_ENV === 'production' || enableDevelopmentEmailsSetting.get()) {
+const enableDevelopmentEmailsSetting = new DatabaseServerSetting<boolean>("enableDevelopmentEmails", true);
+export async function sendEmail(renderedEmail: RenderedEmail): Promise<boolean> {
+  if (process.env.NODE_ENV === "production" || enableDevelopmentEmailsSetting.get()) {
     console.log("//////// Sending email..."); //eslint-disable-line
     console.log("to: " + renderedEmail.to); //eslint-disable-line
     console.log("subject: " + renderedEmail.subject); //eslint-disable-line
     console.log("from: " + renderedEmail.from); //eslint-disable-line
-    
+
     return sendEmailSmtp(renderedEmail); // From meteor's 'email' package
   } else {
     console.log("//////// Pretending to send email (not production and enableDevelopmentEmails is false)"); //eslint-disable-line
@@ -321,19 +332,15 @@ export async function logSentEmail(renderedEmail: RenderedEmail, user: DbUser | 
       intercom: false,
     },
     validate: false,
-  })
+  });
 }
 
 // Returns a string explanation of why we can't send emails to a given user, or
 // null if there is no such reason and we can email them.
-export function reasonUserCantReceiveEmails(user: DbUser): string|null
-{
-  if (!user.email)
-    return "No email address";
-  if (!userEmailAddressIsVerified(user) && forumTypeSetting.get() !== 'EAForum')
-    return "Address is not verified";
-  if (user.unsubscribeFromAll)
-    return "Setting 'Do not send me any emails' is checked";
-  
+export function reasonUserCantReceiveEmails(user: DbUser): string | null {
+  if (!user.email) return "No email address";
+  if (!userEmailAddressIsVerified(user) && forumTypeSetting.get() !== "EAForum") return "Address is not verified";
+  if (user.unsubscribeFromAll) return "Setting 'Do not send me any emails' is checked";
+
   return null;
 }
