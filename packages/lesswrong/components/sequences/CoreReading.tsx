@@ -104,12 +104,11 @@ const coreReadingCollections: Array<CoreReadingCollection> = forumSelect({
       title: "A new philosophy of progress",
       id: "progress-philosophy",
       userId: "vvHZTqAQBJmRopLah",
-      summary:
-        "The 19th century believed in progress; the 20th century grew skeptical. We need a new way forward.",
+      summary: "The 19th century believed in progress; the 20th century grew skeptical. We need a new way forward.",
       imageId: "library/Nicolas_de_Condorcet_apejac",
       color: "#0c869b",
       big: true,
-      url: "/posts/iTJHGrFRuHYX4HotJ"
+      url: "/posts/iTJHGrFRuHYX4HotJ",
     },
     {
       title: "Industrial literacy",
@@ -126,14 +125,48 @@ const coreReadingCollections: Array<CoreReadingCollection> = forumSelect({
       title: "Progress studies as a civic duty",
       id: "progress-civic-duty",
       userId: "vvHZTqAQBJmRopLah",
-      summary: "We have a responsibility to learn the underpinnings of the standard of living we all enjoy. To understand and appreciate how we got here, and what it took. And ultimately, to keep it going",
+      summary:
+        "We have a responsibility to learn the underpinnings of the standard of living we all enjoy. To understand and appreciate how we got here, and what it took. And ultimately, to keep it going",
       imageId: "library/scotus-building_rappgq",
       color: "#d96704",
       big: false,
       url: "/posts/iTJHGrFRuHYX4HotJ",
     },
   ],
-  default: [],
+  default: [
+    {
+      title: "The EA Handbook",
+      id: "handbook",
+      userId: "jd3Bs7YAT2KqnLxYD",
+      summary:
+        "To help you learn the basics of effective altruism, we took some of the movement's best writing and made this handbook. Think of it as the textbook you'd get for a college course on EA. It explains the core ideas, so that you can start applying them to your own life.",
+      imageId: "Banner/qnsx7lpxxfpf7tqxmnql",
+      color: "#0c869b",
+      big: true,
+      url: "/handbook",
+    },
+    {
+      title: "Replacing Guilt",
+      id: "replacing-guilt",
+      userId: "QNsCYAaKRdXZWKPmE",
+      summary:
+        "Nate Soares writes about replacing guilt with other feelings and finding better ways to self-motivate, so that you can build a better future without falling apart first.",
+      imageId: "Banner/qnjqqba8qclypnkvdkqn",
+      color: "#d0c9d5",
+      big: false,
+      url: "/s/a2LBRPLhvwB83DSGq",
+    },
+    {
+      title: "Most Important Century",
+      id: "most-important",
+      userId: "9Fg4woeMPHoGa6kDA",
+      summary: `Holden Karnofsky argues that there is a good chance of a productivity explosion by 2100, which could quickly lead to a "technologically mature" civilization.`,
+      imageId: "jacob-mejicanos-P6s8EbcSgmA-unsplash.jpg",
+      color: "#d96704",
+      big: false,
+      url: "/s/isENJuPdB3fhjWYHd",
+    },
+  ],
 });
 
 const CoreReading = ({ minimal = false, classes }: { minimal?: boolean; classes: ClassesType }) => (

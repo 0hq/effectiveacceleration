@@ -1,15 +1,15 @@
-import type { FilterTag } from './filterSettings';
-import { getPublicSettings, getPublicSettingsLoaded, registeredSettings } from './settingsCache';
+import type { FilterTag } from "./filterSettings";
+import { getPublicSettings, getPublicSettingsLoaded, registeredSettings } from "./settingsCache";
 
 const getNestedProperty = function (obj, desc) {
-  var arr = desc.split('.');
-  while(arr.length && (obj = obj[arr.shift()]));
+  var arr = desc.split(".");
+  while (arr.length && (obj = obj[arr.shift()]));
   return obj;
 };
 
-export function initializeSetting(settingName: string, settingType: "server" | "public" | "instance")  {
-  if (registeredSettings[settingName]) throw Error(`Already initialized a setting with name ${settingName} before.`)
-  registeredSettings[settingName] = settingType
+export function initializeSetting(settingName: string, settingType: "server" | "public" | "instance") {
+  if (registeredSettings[settingName]) throw Error(`Already initialized a setting with name ${settingName} before.`);
+  registeredSettings[settingName] = settingType;
 }
 
 /* 
@@ -29,18 +29,15 @@ export function initializeSetting(settingName: string, settingType: "server" | "
     get: Returns the current value of the setting (either the value in the database or the default value)
 */
 export class DatabasePublicSetting<SettingValueType> {
-  constructor(
-    private settingName: string, 
-    private defaultValue: SettingValueType
-  ) {
-    initializeSetting(settingName, "public")
+  constructor(private settingName: string, private defaultValue: SettingValueType) {
+    initializeSetting(settingName, "public");
   }
   get(): SettingValueType {
     // eslint-disable-next-line no-console
-    if (!getPublicSettingsLoaded()) throw Error("Tried to access public setting before it was initialized")
-    const cacheValue = getNestedProperty(getPublicSettings(), this.settingName)
-    if (typeof cacheValue === 'undefined') return this.defaultValue
-    return cacheValue
+    if (!getPublicSettingsLoaded()) throw Error("Tried to access public setting before it was initialized");
+    const cacheValue = getNestedProperty(getPublicSettings(), this.settingName);
+    if (typeof cacheValue === "undefined") return this.defaultValue;
+    return cacheValue;
   }
 }
 
@@ -48,23 +45,29 @@ export class DatabasePublicSetting<SettingValueType> {
   Public Database Settings
 */
 
-export const googleTagManagerIdSetting = new DatabasePublicSetting<string | null>('googleTagManager.apiKey', null) // Google Tag Manager ID
-export const reCaptchaSiteKeySetting = new DatabasePublicSetting<string | null>('reCaptcha.apiKey', null) // ReCaptcha API Key
+export const googleTagManagerIdSetting = new DatabasePublicSetting<string | null>("googleTagManager.apiKey", null); // Google Tag Manager ID
+export const reCaptchaSiteKeySetting = new DatabasePublicSetting<string | null>("reCaptcha.apiKey", null); // ReCaptcha API Key
 // Algolia Search Settings
-export const algoliaAppIdSetting = new DatabasePublicSetting<string | null>('algolia.appId', "EO213JH83U")
-export const algoliaSearchKeySetting = new DatabasePublicSetting<string | null>('algolia.searchKey', "1cdaa88528544f2c1cf428ca71865248")
-export const algoliaPrefixSetting = new DatabasePublicSetting<string | null>('algolia.indexPrefix', null)
+export const algoliaAppIdSetting = new DatabasePublicSetting<string | null>("algolia.appId", "EO213JH83U");
+export const algoliaSearchKeySetting = new DatabasePublicSetting<string | null>(
+  "algolia.searchKey",
+  "1cdaa88528544f2c1cf428ca71865248"
+);
+export const algoliaPrefixSetting = new DatabasePublicSetting<string | null>("algolia.indexPrefix", null);
 
-export const ckEditorUploadUrlSetting = new DatabasePublicSetting<string | null>('ckEditor.uploadUrl', null) // Image Upload URL for CKEditor
-export const ckEditorWebsocketUrlSetting = new DatabasePublicSetting<string | null>('ckEditor.webSocketUrl', null) // Websocket URL for CKEditor (for collaboration)
+export const ckEditorUploadUrlSetting = new DatabasePublicSetting<string | null>("ckEditor.uploadUrl", null); // Image Upload URL for CKEditor
+export const ckEditorWebsocketUrlSetting = new DatabasePublicSetting<string | null>("ckEditor.webSocketUrl", null); // Websocket URL for CKEditor (for collaboration)
 
-export const hideUnreviewedAuthorCommentsSettings = new DatabasePublicSetting<boolean>('hideUnreviewedAuthorComments', false) // Hide comments by unreviewed authors (prevents spam, but delays new user engagement)
-export const cloudinaryCloudNameSetting = new DatabasePublicSetting<string>('cloudinary.cloudName', 'lesswrong-2-0') // Cloud name for cloudinary hosting
+export const hideUnreviewedAuthorCommentsSettings = new DatabasePublicSetting<boolean>(
+  "hideUnreviewedAuthorComments",
+  false
+); // Hide comments by unreviewed authors (prevents spam, but delays new user engagement)
+export const cloudinaryCloudNameSetting = new DatabasePublicSetting<string>("cloudinary.cloudName", "dnviwi65a"); // Cloud name for cloudinary hosting
 
-export const forumAllPostsNumDaysSetting = new DatabasePublicSetting<number>('forum.numberOfDays', 10) // Number of days to display in the timeframe view
+export const forumAllPostsNumDaysSetting = new DatabasePublicSetting<number>("forum.numberOfDays", 10); // Number of days to display in the timeframe view
 
-export const localeSetting = new DatabasePublicSetting<string>('locale', 'en-US')
-export const legacyRouteAcronymSetting = new DatabasePublicSetting<string>('legacyRouteAcronym', 'ec') // Because the EA Forum was identical except for the change from /lw/ to /ea/
+export const localeSetting = new DatabasePublicSetting<string>("locale", "en-US");
+export const legacyRouteAcronymSetting = new DatabasePublicSetting<string>("legacyRouteAcronym", "ec"); // Because the EA Forum was identical except for the change from /lw/ to /ea/
 
 // frontpageFilterSettings default tag filter
 //
@@ -72,27 +75,39 @@ export const legacyRouteAcronymSetting = new DatabasePublicSetting<string>('lega
 // here to allow the EA Forum to nudge down the visibility of posts with the
 // Community tag, can be trivially applied to personalBlog, frontpage, and
 // curated, if those ever get refactored into tags.
-export const defaultVisibilityTags = new DatabasePublicSetting<Array<FilterTag>>('defaultVisibilityTags', [])
+export const defaultVisibilityTags = new DatabasePublicSetting<Array<FilterTag>>("defaultVisibilityTags", []);
 
-export const gatherTownRoomId = new DatabasePublicSetting<string | null>("gatherTownRoomId", null)
-export const gatherTownRoomName = new DatabasePublicSetting<string | null>("gatherTownRoomName", null)
+export const gatherTownRoomId = new DatabasePublicSetting<string | null>("gatherTownRoomId", null);
+export const gatherTownRoomName = new DatabasePublicSetting<string | null>("gatherTownRoomName", null);
 
 // Public elicit settings
-export const elicitSourceURL = new DatabasePublicSetting('elicitSourceURL', 'https://LessWrong.com')
-export const elicitSourceId = new DatabasePublicSetting('elicitSourceId', 'XCjOpumu-')
+export const elicitSourceURL = new DatabasePublicSetting("elicitSourceURL", "https://LessWrong.com");
+export const elicitSourceId = new DatabasePublicSetting("elicitSourceId", "XCjOpumu-");
 
-export const mapboxAPIKeySetting = new DatabasePublicSetting<string | null>('mapbox.apiKey', "pk.eyJ1Ijoid2RlcHVlIiwiYSI6ImNsZWdkcno0dDBtMGgzcG5wdWwxZ3ZuZm0ifQ.NaBW0749AwkXqxrfxLorcA") // API Key for the mapbox map and tile requests
+export const mapboxAPIKeySetting = new DatabasePublicSetting<string | null>(
+  "mapbox.apiKey",
+  "pk.eyJ1Ijoid2RlcHVlIiwiYSI6ImNsZWdkcno0dDBtMGgzcG5wdWwxZ3ZuZm0ifQ.NaBW0749AwkXqxrfxLorcA"
+); // API Key for the mapbox map and tile requests
 
-export const mailchimpForumDigestListIdSetting = new DatabasePublicSetting<string | null>('mailchimp.forumDigestListId', null)
-export const mailchimpEAForumListIdSetting = new DatabasePublicSetting<string | null>('mailchimp.eaForumListId', null)
+export const mailchimpForumDigestListIdSetting = new DatabasePublicSetting<string | null>(
+  "mailchimp.forumDigestListId",
+  null
+);
+export const mailchimpEAForumListIdSetting = new DatabasePublicSetting<string | null>("mailchimp.eaForumListId", null);
 
-export const isProductionDBSetting = new DatabasePublicSetting<boolean>('isProductionDB', false)
+export const isProductionDBSetting = new DatabasePublicSetting<boolean>("isProductionDB", false);
 
 // You will need to restart your server after changing these at present;
 // FrontpageReviewWidget reads them at startup.
-export const annualReviewStart = new DatabasePublicSetting('annualReview.start', "2021-11-30")
+export const annualReviewStart = new DatabasePublicSetting("annualReview.start", "2021-11-30");
 // The following dates cut off their phase at the end of the day
-export const annualReviewNominationPhaseEnd = new DatabasePublicSetting('annualReview.nominationPhaseEnd', "2021-12-14")
-export const annualReviewReviewPhaseEnd = new DatabasePublicSetting('annualReview.reviewPhaseEnd', "2022-01-15")
-export const annualReviewEnd = new DatabasePublicSetting('annualReview.end', "2022-02-01")
-export const annualReviewAnnouncementPostPathSetting = new DatabasePublicSetting<string | null>('annualReview.announcementPostPath', null)
+export const annualReviewNominationPhaseEnd = new DatabasePublicSetting(
+  "annualReview.nominationPhaseEnd",
+  "2021-12-14"
+);
+export const annualReviewReviewPhaseEnd = new DatabasePublicSetting("annualReview.reviewPhaseEnd", "2022-01-15");
+export const annualReviewEnd = new DatabasePublicSetting("annualReview.end", "2022-02-01");
+export const annualReviewAnnouncementPostPathSetting = new DatabasePublicSetting<string | null>(
+  "annualReview.announcementPostPath",
+  null
+);
