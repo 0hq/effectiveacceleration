@@ -81,8 +81,8 @@ export const gatherTownRoomId = new DatabasePublicSetting<string | null>("gather
 export const gatherTownRoomName = new DatabasePublicSetting<string | null>("gatherTownRoomName", null);
 
 // Public elicit settings
-export const elicitSourceURL = new DatabasePublicSetting("elicitSourceURL", "https://LessWrong.com");
-export const elicitSourceId = new DatabasePublicSetting("elicitSourceId", "XCjOpumu-");
+export const elicitSourceURL = new DatabasePublicSetting("elicitSourceURL", null);
+export const elicitSourceId = new DatabasePublicSetting("elicitSourceId", null);
 
 export const mapboxAPIKeySetting = new DatabasePublicSetting<string | null>(
   "mapbox.apiKey",

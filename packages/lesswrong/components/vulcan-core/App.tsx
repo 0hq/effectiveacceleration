@@ -1,37 +1,47 @@
-import moment from 'moment';
-import PropTypes from 'prop-types';
-import React, { PureComponent } from 'react';
+import moment from "moment";
+import PropTypes from "prop-types";
+import React, { PureComponent } from "react";
 // eslint-disable-next-line no-restricted-imports
-import { withRouter } from 'react-router';
-import { withCurrentUser } from '../../lib/crud/withCurrentUser';
-import { DatabasePublicSetting, localeSetting } from '../../lib/publicSettings';
-import { LocationContext, NavigationContext, parseRoute, ServerRequestStatusContext, SubscribeLocationContext, ServerRequestStatusContextType } from '../../lib/vulcan-core/appContext';
-import { IntlProvider, intlShape } from '../../lib/vulcan-i18n';
-import { Components, registerComponent, Strings } from '../../lib/vulcan-lib';
-import { userIdentifiedCallback } from '../../lib/analyticsEvents';
-import { MessageContext } from '../common/withMessages';
-import type { RouterLocation } from '../../lib/vulcan-lib/routes';
+import { withRouter } from "react-router";
+import { withCurrentUser } from "../../lib/crud/withCurrentUser";
+import { DatabasePublicSetting, localeSetting } from "../../lib/publicSettings";
+import {
+  LocationContext,
+  NavigationContext,
+  parseRoute,
+  ServerRequestStatusContext,
+  SubscribeLocationContext,
+  ServerRequestStatusContextType,
+} from "../../lib/vulcan-core/appContext";
+import { IntlProvider, intlShape } from "../../lib/vulcan-i18n";
+import { Components, registerComponent, Strings } from "../../lib/vulcan-lib";
+import { userIdentifiedCallback } from "../../lib/analyticsEvents";
+import { MessageContext } from "../common/withMessages";
+import type { RouterLocation } from "../../lib/vulcan-lib/routes";
 
-const siteImageSetting = new DatabasePublicSetting<string | null>('siteImage', "https://res.cloudinary.com/progress-forum/image/upload/v1647499492/media/externalthumbnail.png") // An image used to represent the site on social media
+const siteImageSetting = new DatabasePublicSetting<string | null>(
+  "siteImage",
+  "https://www.myfirstnda.com/src/OpenGraphEACC.png"
+); // An image used to represent the site on social media
 
 interface ExternalProps {
-  apolloClient: any
-  serverRequestStatus?: ServerRequestStatusContextType
+  apolloClient: any;
+  serverRequestStatus?: ServerRequestStatusContextType;
 }
 interface AppProps extends ExternalProps {
   // From withRouter
-  location: any
-  history: any
-  
+  location: any;
+  history: any;
+
   // From withCurrentUser HoC
-  currentUser: UsersCurrent
+  currentUser: UsersCurrent;
 }
 
-class App extends PureComponent<AppProps,any> {
-  locationContext: RouterLocation|null = null
-  subscribeLocationContext: RouterLocation|null = null
-  navigationContext: any
-  
+class App extends PureComponent<AppProps, any> {
+  locationContext: RouterLocation | null = null;
+  subscribeLocationContext: RouterLocation | null = null;
+  navigationContext: any;
+
   constructor(props: AppProps) {
     super(props);
     if (props.currentUser) {
@@ -53,11 +63,11 @@ class App extends PureComponent<AppProps,any> {
   Show a flash message
 
   */
-  flash = message => {
+  flash = (message) => {
     this.setState({
-      messages: [...this.state.messages, message]
+      messages: [...this.state.messages, message],
     });
-  }
+  };
 
   /*
 
@@ -68,12 +78,12 @@ class App extends PureComponent<AppProps,any> {
     // When clearing messages, we first set all current messages to have a hide property
     // And only after 500ms set the array to empty, to allow UI elements to show a fade-out animation
     this.setState({
-      messages: this.state.messages.map(message => ({...message, hide: true}))
-    })
+      messages: this.state.messages.map((message) => ({ ...message, hide: true })),
+    });
     setTimeout(() => {
-      this.setState({ messages: []});
-    }, 500)
-  }
+      this.setState({ messages: [] });
+    }, 500);
+  };
 
   getLocale = (truncate?: boolean) => {
     return truncate ? this.state.locale.slice(0, 2) : this.state.locale;
@@ -93,30 +103,30 @@ class App extends PureComponent<AppProps,any> {
       });
     }
   }
-  
+
   render() {
     const { flash } = this;
     const { messages } = this.state;
     const { currentUser, serverRequestStatus } = this.props;
 
     // Parse the location into a route/params/query/etc.
-    const location = parseRoute({location: this.props.location});
-    
+    const location = parseRoute({ location: this.props.location });
+
     if (location.redirected) {
-      return <Components.PermanentRedirect url={location.url}/>
+      return <Components.PermanentRedirect url={location.url} />;
     }
-    
+
     // Reuse the container objects for location and navigation context, so that
     // they will be reference-stable and won't trigger spurious rerenders.
     if (!this.locationContext) {
-      this.locationContext = {...location};
+      this.locationContext = { ...location };
     } else {
       Object.assign(this.locationContext, location);
     }
 
     if (!this.navigationContext) {
       this.navigationContext = {
-        history: this.props.history
+        history: this.props.history,
       };
     } else {
       this.navigationContext.history = this.props.history;
@@ -125,7 +135,7 @@ class App extends PureComponent<AppProps,any> {
     // subscribeLocationContext changes (by shallow comparison) whenever the
     // URL changes.
     if (!this.subscribeLocationContext || this.subscribeLocationContext.pathname != location.pathname) {
-      this.subscribeLocationContext = {...location};
+      this.subscribeLocationContext = { ...location };
     } else {
       Object.assign(this.subscribeLocationContext, location);
     }
@@ -133,21 +143,21 @@ class App extends PureComponent<AppProps,any> {
     const { RouteComponent } = location;
     return (
       <LocationContext.Provider value={this.locationContext}>
-      <SubscribeLocationContext.Provider value={this.subscribeLocationContext}>
-      <NavigationContext.Provider value={this.navigationContext}>
-      <ServerRequestStatusContext.Provider value={serverRequestStatus||null}>
-      <IntlProvider locale={this.getLocale()} key={this.getLocale()} messages={Strings[this.getLocale()]}>
-        <MessageContext.Provider value={{ messages, flash, clear: this.clear }}>
-          <Components.HeadTags image={siteImageSetting.get()} />
-          <Components.ScrollToTop />
-          <Components.Layout currentUser={currentUser} messages={messages}>
-            <RouteComponent />
-          </Components.Layout>
-        </MessageContext.Provider>
-      </IntlProvider>
-      </ServerRequestStatusContext.Provider>
-      </NavigationContext.Provider>
-      </SubscribeLocationContext.Provider>
+        <SubscribeLocationContext.Provider value={this.subscribeLocationContext}>
+          <NavigationContext.Provider value={this.navigationContext}>
+            <ServerRequestStatusContext.Provider value={serverRequestStatus || null}>
+              <IntlProvider locale={this.getLocale()} key={this.getLocale()} messages={Strings[this.getLocale()]}>
+                <MessageContext.Provider value={{ messages, flash, clear: this.clear }}>
+                  <Components.HeadTags image={siteImageSetting.get()} />
+                  <Components.ScrollToTop />
+                  <Components.Layout currentUser={currentUser} messages={messages}>
+                    <RouteComponent />
+                  </Components.Layout>
+                </MessageContext.Provider>
+              </IntlProvider>
+            </ServerRequestStatusContext.Provider>
+          </NavigationContext.Provider>
+        </SubscribeLocationContext.Provider>
       </LocationContext.Provider>
     );
   }
@@ -160,19 +170,14 @@ class App extends PureComponent<AppProps,any> {
 
 //registerComponent('App', App, withCurrentUser, [withUpdate, updateOptions], withCookies, withRouter);
 // TODO LESSWRONG-Temporarily omit withCookies until it's debugged
-const AppComponent = registerComponent<ExternalProps>('App', App, {
-  hocs: [
-    withCurrentUser,
-    withRouter
-  ]
+const AppComponent = registerComponent<ExternalProps>("App", App, {
+  hocs: [withCurrentUser, withRouter],
 });
-
-
 
 declare global {
   interface ComponentTypes {
-    App: typeof AppComponent
+    App: typeof AppComponent;
   }
 }
 
-export default App; 
+export default App;
