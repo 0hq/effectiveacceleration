@@ -33,8 +33,10 @@ const settingsFile = opts.settings || "settings.json";
 
 if (isProduction) {
   process.env.NODE_ENV = "production";
+  process.env.MONGO_URL = process.env.PRODUCTION_MONGO_URL || "mongodb://localhost:27017";
 } else {
   process.env.NODE_ENV = "development";
+  process.env.MONGO_URL = process.env.TEST_MONGO_URL || "mongodb://localhost:27017";
 }
 if (opts.mongoUrl) {
   process.env.MONGO_URL = opts.mongoUrl;

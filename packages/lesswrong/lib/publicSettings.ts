@@ -50,11 +50,12 @@ export const reCaptchaSiteKeySetting = new DatabasePublicSetting<string | null>(
 // Algolia Search Settings
 export const algoliaAppIdSetting = new DatabasePublicSetting<string | null>(
   "algolia.appId",
-  process.env.ALGOLIA_APP_ID || null
+  (process.env.NODE_ENV == "production" ? process.env.ALGOLIA_APP_ID : process.env.PRODUCTION_ALGOLIA_APP_ID) || null
 );
 export const algoliaSearchKeySetting = new DatabasePublicSetting<string | null>(
   "algolia.searchKey",
-  process.env.ALGOLIA_SEARCH_KEY || null
+  (process.env.NODE_ENV == "production" ? process.env.ALGOLIA_SEARCH_KEY : process.env.PRODUCTION_ALGOLIA_SEARCH_KEY) ||
+    null
 );
 export const algoliaPrefixSetting = new DatabasePublicSetting<string | null>("algolia.indexPrefix", null);
 

@@ -8,19 +8,6 @@ const algoliaAutoSyncIndexesSetting = new DatabasePublicSetting<boolean>(
   process.env.NODE_ENV === "production"
 );
 
-// Run on server startup, don't use Meteor.startup
-async function algoliaCron() {
-  if (algoliaAutoSyncIndexesSetting.get()) {
-    await algoliaExportAll();
-    await algoliaCleanAll();
-  } else {
-    // eslint-disable-next-line no-console
-    console.log("Auto-rebuild of Algolia indexes not enabled in config");
-  }
-}
-
-void algoliaCron();
-
 addCronJob({
   name: "updateAlgoliaIndex",
   interval: "every 24 hours",

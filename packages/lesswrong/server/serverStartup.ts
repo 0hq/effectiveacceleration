@@ -1,16 +1,16 @@
-import { MongoClient } from 'mongodb';
-import { setDatabaseConnection } from '../lib/mongoCollection';
-import { onStartupFunctions, isAnyTest } from '../lib/executionEnvironment';
-import { refreshSettingsCaches } from './loadDatabaseSettings';
-import { getCommandLineArguments } from './commandLine';
-import { startWebserver } from './apolloServer';
-import { initGraphQL } from './vulcan-lib/apollo-server/initGraphQL';
-import { createVoteableUnionType } from './votingGraphQL';
-import { Globals } from '../lib/vulcan-lib/config';
-import process from 'process';
-import readline from 'readline';
-import chokidar from 'chokidar';
-import fs from 'fs';
+import { MongoClient } from "mongodb";
+import { setDatabaseConnection } from "../lib/mongoCollection";
+import { onStartupFunctions, isAnyTest } from "../lib/executionEnvironment";
+import { refreshSettingsCaches } from "./loadDatabaseSettings";
+import { getCommandLineArguments } from "./commandLine";
+import { startWebserver } from "./apolloServer";
+import { initGraphQL } from "./vulcan-lib/apollo-server/initGraphQL";
+import { createVoteableUnionType } from "./votingGraphQL";
+import { Globals } from "../lib/vulcan-lib/config";
+import process from "process";
+import readline from "readline";
+import chokidar from "chokidar";
+import fs from "fs";
 
 async function serverStartup() {
   // eslint-disable-next-line no-console
@@ -20,54 +20,53 @@ async function serverStartup() {
   const CSI = "\x1b[";
   const blue = isTTY ? `${CSI}34m` : "";
   const endBlue = isTTY ? `${CSI}39m` : "";
-  
+
   wrapConsoleLogFunctions((log, ...message) => {
     process.stdout.write(`${blue}${new Date().toISOString()}:${endBlue} `);
     log(...message);
-    
+
     // Uncomment to add stacktraces to every console.log, for debugging where
     // mysterious output came from.
     // var stack = new Error().stack
     // log(stack)
   });
-  
+
   const commandLineArguments = getCommandLineArguments();
-  
+
   try {
     // eslint-disable-next-line no-console
     console.log("Connecting to mongodb");
     const client = new MongoClient(commandLineArguments.mongoUrl, {
       // See https://mongodb.github.io/node-mongodb-native/3.6/api/MongoClient.html
       // for various options that could be tuned here
-      
-      // A deprecation warning says to use this option 
+
+      // A deprecation warning says to use this option
       useUnifiedTopology: true,
     });
     await client.connect();
     const db = client.db();
     setDatabaseConnection(client, db);
-  } catch(err) {
+  } catch (err) {
     // eslint-disable-next-line no-console
     console.error("Failed to connect to mongodb: ", err);
     process.exit(1);
     return;
   }
-  
+
   // eslint-disable-next-line no-console
   console.log("Loading settings");
   await refreshSettingsCaches();
-  
-  require('../server.ts');
-  
+
+  require("../server.ts");
+
   // eslint-disable-next-line no-console
   console.log("Running onStartup functions");
-  for (let startupFunction of onStartupFunctions)
-    await startupFunction();
-  
+  for (let startupFunction of onStartupFunctions) await startupFunction();
+
   // define executableSchema
   createVoteableUnionType();
   initGraphQL();
-  
+
   if (commandLineArguments.shellMode) {
     initShell();
   } else {
@@ -78,7 +77,7 @@ async function serverStartup() {
       startWebserver();
     }
   }
-  
+
   /*if (process.stdout.isTTY) {
     console.log("Output is a TTY");
     initShell();
@@ -88,34 +87,32 @@ async function serverStartup() {
   }*/
 }
 
-function wrapConsoleLogFunctions(wrapper: (originalFn: any, ...message: any[])=>void) {
+function wrapConsoleLogFunctions(wrapper: (originalFn: any, ...message: any[]) => void) {
   for (let functionName of ["log", "info", "warn", "error", "trace"]) {
     // eslint-disable-next-line no-console
     const originalFn = console[functionName];
     // eslint-disable-next-line no-console
     console[functionName] = (...message: any[]) => {
       wrapper(originalFn, ...message);
-    }
+    };
   }
 }
 
-function wrappedConsoleLog(unwrappedConsoleLog: (...messages: string[])=>void, message: string)
-{
+function wrappedConsoleLog(unwrappedConsoleLog: (...messages: string[]) => void, message: string) {
   const screenHeight = process.stdout.rows;
-  const ESC = '\x1b';
-  const CSI = ESC+'[';
-  
+  const ESC = "\x1b";
+  const CSI = ESC + "[";
+
   process.stdout.write(`${CSI}s`); // Save cursor
-  process.stdout.write(`${CSI}1;${screenHeight-2}r`); // Set scroll region
-  process.stdout.write(`${CSI}${screenHeight-2};1H`); // Move cursor to insertion point
-  process.stdout.write(message+"\n"); // Write the output
+  process.stdout.write(`${CSI}1;${screenHeight - 2}r`); // Set scroll region
+  process.stdout.write(`${CSI}${screenHeight - 2};1H`); // Move cursor to insertion point
+  process.stdout.write(message + "\n"); // Write the output
   process.stdout.write(`${CSI}r`); // Clear scroll region
   process.stdout.write(`${CSI}u`); // Restore cursor
 }
 
-function initShell()
-{
-  const repl = require('repl');
+function initShell() {
+  const repl = require("repl");
   /*const rl = readline.createInterface({
     input: process.stdin,
     output: process.stdout,
@@ -126,7 +123,7 @@ function initShell()
     rl.prompt();
   });
   rl.prompt();*/
-  
+
   const r = repl.start({
     prompt: "> ",
     terminal: true,
@@ -143,9 +140,9 @@ function initShell()
 // write-access inside the repo directory is already equivalent to script
 // execution.
 const watchForShellCommands = () => {
-  const watcher = chokidar.watch('./tmp/pendingShellCommands');
-  watcher.on('add', async (path) => {
-    const fileContents = fs.readFileSync(path, 'utf8');
+  const watcher = chokidar.watch("./tmp/pendingShellCommands");
+  watcher.on("add", async (path) => {
+    const fileContents = fs.readFileSync(path, "utf8");
     // eslint-disable-next-line no-console
     console.log(`Running shell command: ${fileContents}`);
     fs.unlinkSync(path);
@@ -153,13 +150,13 @@ const watchForShellCommands = () => {
       const result = await eval(fileContents);
       // eslint-disable-next-line no-console
       console.log("Finished. Result: ", result);
-    } catch(e) {
+    } catch (e) {
       // eslint-disable-next-line no-console
       console.log("Failed.");
       // eslint-disable-next-line no-console
       console.log(e);
     }
   });
-}
+};
 
 void serverStartup();
