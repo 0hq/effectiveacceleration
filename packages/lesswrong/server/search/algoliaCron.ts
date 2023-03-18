@@ -3,10 +3,7 @@ import { addCronJob } from "../cronUtil";
 import { algoliaCleanAll, algoliaExportAll } from "../scripts/algoliaExport";
 
 // NB: This setting will set you back like $500/mo
-const algoliaAutoSyncIndexesSetting = new DatabasePublicSetting<boolean>(
-  "algolia.autoSyncIndexes",
-  process.env.NODE_ENV === "production"
-);
+const algoliaAutoSyncIndexesSetting = new DatabasePublicSetting<boolean>("algolia.autoSyncIndexes", false);
 
 addCronJob({
   name: "updateAlgoliaIndex",
