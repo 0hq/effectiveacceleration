@@ -6,6 +6,10 @@ The E/ACC forums are based on Forum Magnum, the codebase powering [LessWrong](ht
 The team behind LessWrong created this codebase in 2017 as a rewrite of the
 original version of LessWrong, which was a difficult-to-maintain fork of reddit.
 
+## Running on Server
+
+ngrok http 3000 -hostname=www.effectiveacceleration.org
+
 ## Technologies
 
 Forum Magnum is built on top of a number major open-source libraries.
@@ -26,11 +30,11 @@ Forum Magnum is built on top of a number major open-source libraries.
 
 ### Requirements
 
-  * MacOS or Linux
-    * Known to work on MacOS 10.15 and Ubuntu 18.04, should work on others
-  * Node
-    * see `.nvmrc` for the required node version
-    * You can use [Node Version Manager](https://github.com/creationix/nvm) to install the appropriate version of Node
+- MacOS or Linux
+  - Known to work on MacOS 10.15 and Ubuntu 18.04, should work on others
+- Node
+  - see `.nvmrc` for the required node version
+  - You can use [Node Version Manager](https://github.com/creationix/nvm) to install the appropriate version of Node
 
 ### Installation
 
@@ -78,47 +82,47 @@ You can also see auto-generated documentation of our GraphQL API endpoints and t
 
 Eventually, it’ll be helpful to have a good understanding of each of those technologies (both to develop new features and fix many kinds of bugs). But for now, the most useful things to know are:
 
-* **Collections** – Mongo databases are organized around *collections* of documents. For example, the Users collection is where the user objects live. Mongo databases do not technically have a rigid schema, but VulcanJS has a pattern for files that determine the intended schema (which is used by the API, forms and permissions systems to determine what database modifications are allowed). Each collection is a subdirectory in `packages/lesswrong/lib/collections`.
+- **Collections** – Mongo databases are organized around _collections_ of documents. For example, the Users collection is where the user objects live. Mongo databases do not technically have a rigid schema, but VulcanJS has a pattern for files that determine the intended schema (which is used by the API, forms and permissions systems to determine what database modifications are allowed). Each collection is a subdirectory in `packages/lesswrong/lib/collections`.
 
-* **Components** – Our React components are organized in a folder structure based loosely on our collections. (i.e. components related to the `User` collection go in the `packages/lesswrong/components/users` folder). Each component is (usually) defined in a separate `.tsx` file in `packages/lesswrong/components` and imported from `packages/lesswrong/lib/components.ts`.
+- **Components** – Our React components are organized in a folder structure based loosely on our collections. (i.e. components related to the `User` collection go in the `packages/lesswrong/components/users` folder). Each component is (usually) defined in a separate `.tsx` file in `packages/lesswrong/components` and imported from `packages/lesswrong/lib/components.ts`.
 
   Some edge cases just go in a randomly picked folder (such as the RecentDiscussion components, which involve both comments and posts, but live in the comments folder)
 
   There are [multiple ways of creating a ReactJS component](https://themeteorchef.com/blog/understanding-react-component-types). New components should be functional components, using hooks and ideally minimizing usage of higher-order components. Ideally, each component does one (relatively) simple thing and does it well, with smart components and dumb components separated out. In practice, we haven’t done a great job with this. (Scope creep turns what were once simple components into increasingly complex monstrosities that we should really refactor but haven’t gotten around to it).
 
   We use Vulcan’s `registerComponent` function to add them as children to a central “Components” table.
-  
-* **Smart Forms** - Vulcan also allows us to automatically generate simple forms to create and edit Documents (in the Mongo sense of the word Document, any instance of a Collection). This functionality is called Smart Forms.
+
+- **Smart Forms** - Vulcan also allows us to automatically generate simple forms to create and edit Documents (in the Mongo sense of the word Document, any instance of a Collection). This functionality is called Smart Forms.
 
   You can create an `EditFoo` page, which renders `WrappedSmartForm`, which then automagically creates a form for you. We use this to edit just about every Document in the codebase. How does it know what type of input you want though? This is the interesting part. You define the way you want to edit fields in the collection schema. So in Posts you have (selected examples):
 
   - Sticky
-      - Because it's admin-only, it doesn't show up unless it's edited by an admin.
-      - It's control is `'checkbox'`, which makes it editable by a simple checkbox.
-      - It's grouped among admin options, so it appears with the other admin options
+    - Because it's admin-only, it doesn't show up unless it's edited by an admin.
+    - It's control is `'checkbox'`, which makes it editable by a simple checkbox.
+    - It's grouped among admin options, so it appears with the other admin options
   - Title
-      - It's control is `'EditTitle'`, which means the Smart Form will look in Components for an EditTitle component, and then use that as the UI for modifying the Title.
-      
-* **useFoo (React Hooks)** - We make heavy use of [React hooks](https://reactjs.org/docs/hooks-intro.html) for querying data, managing state, and accessing shared data like the current user.
+    - It's control is `'EditTitle'`, which means the Smart Form will look in Components for an EditTitle component, and then use that as the UI for modifying the Title.
 
-* **withFoo (Higher Order Components)** – Higher-order components exist as alternatives for most hooks, and are sometimes used because class-components cannot use hooks. However, these are deprecated and we are migrating towards only using hooks.
+- **useFoo (React Hooks)** - We make heavy use of [React hooks](https://reactjs.org/docs/hooks-intro.html) for querying data, managing state, and accessing shared data like the current user.
 
-* **Fragments** – GraphQL queries are made using fragments, which describe the fields from a given database object you want to fetch information on. There’s a common failure mode where someone forgets to update a fragment with new fields, and then the site breaks the next time a component attempts to use information from the new field.
+- **withFoo (Higher Order Components)** – Higher-order components exist as alternatives for most hooks, and are sometimes used because class-components cannot use hooks. However, these are deprecated and we are migrating towards only using hooks.
 
-* **makeEditable** - To add a long text field to a schema, use `makeEditable`. It add the correct control component, and creates the necessary callbacks to sync it with the Revisions table.
+- **Fragments** – GraphQL queries are made using fragments, which describe the fields from a given database object you want to fetch information on. There’s a common failure mode where someone forgets to update a fragment with new fields, and then the site breaks the next time a component attempts to use information from the new field.
 
-* **Configuration and Secrets** We store most configuration and secrets in the
+- **makeEditable** - To add a long text field to a schema, use `makeEditable`. It add the correct control component, and creates the necessary callbacks to sync it with the Revisions table.
+
+- **Configuration and Secrets** We store most configuration and secrets in the
   database, not in environment variables like you might expect. See
   `packages/lesswrong/server/databaseSettings.ts` for more.
 
-* **Logging** - If there's a part of the codebase you often want to see debug
+- **Logging** - If there's a part of the codebase you often want to see debug
   logging for, you can create a specific debug logger for that section by using
   `loggerConstructor(scope)`. You can then enable or disable that logger by
   setting the public database setting `debuggers` to include your scope, or by
   setting the instance setting `instanceDebuggers`. See
   `packages/lesswrong/lib/utils/logging.ts` for more.
 
-* **Collection callbacks** - One important thing to know when diving into the
+- **Collection callbacks** - One important thing to know when diving into the
   codebase is how much logic is done by callbacks. Collections have hooks on
   them where we add callbacks that react to CRUD operations. They can fire
   before or after the operation. The running of these callbacks is found in
@@ -133,13 +137,13 @@ used.
 
 ### Debugging
 
-* Use google chrome. Its debugging tools are superior.
-* Use 'debugger' in code. Then Ctrl+Shift+J on your open page, and you can interactively step through the breakpoint. You can also interact with variables in scope at each step using the console at the bottom.
-* Use `console.warn(variable)` when you want to see the stacktrace of `variable`
-* Add the [react dev tools](https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi?hl=en) extension to chrome, and switch to the "React" tab after pressing Ctrl+Shift+J. You can see the react component tree. Once you click on a component in the tree, you will have access to it in the console as the variable `$r`. For example, you can check the props or state using `$r.props` or `$r.state`.
-* If you think a previous commit broke your feature, use [git's builtin debugging tools](https://git-scm.com/book/en/v2/Git-Tools-Debugging-with-Git)
-* (Note: currently aspirational): If you fix a bug, **write a test for it**.
-* If you're trying to debug an email problem, you might want to know about `forcePendingEvents`.
+- Use google chrome. Its debugging tools are superior.
+- Use 'debugger' in code. Then Ctrl+Shift+J on your open page, and you can interactively step through the breakpoint. You can also interact with variables in scope at each step using the console at the bottom.
+- Use `console.warn(variable)` when you want to see the stacktrace of `variable`
+- Add the [react dev tools](https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi?hl=en) extension to chrome, and switch to the "React" tab after pressing Ctrl+Shift+J. You can see the react component tree. Once you click on a component in the tree, you will have access to it in the console as the variable `$r`. For example, you can check the props or state using `$r.props` or `$r.state`.
+- If you think a previous commit broke your feature, use [git's builtin debugging tools](https://git-scm.com/book/en/v2/Git-Tools-Debugging-with-Git)
+- (Note: currently aspirational): If you fix a bug, **write a test for it**.
+- If you're trying to debug an email problem, you might want to know about `forcePendingEvents`.
 
 ## Testing
 
@@ -147,9 +151,9 @@ We use [Jest](https://jestjs.io/) for unit testing, and [Cypress](https://www.cy
 
 ### Cypress
 
-* To run Cypress tests locally, first run `yarn ea-start-testing-db`, then in a separate terminal run either `yarn ea-cypress-run` for a CLI version, or `yarn ea-cypress-open` for a GUI version. To run specific tests in the CLI, you can use the `-s <glob-file-pattern>` option.
-* Test database instance settings for Cypress are stored under `./settings-test.json`.
-* For the basics of writing Cypress tests, see [Writing your first test](https://docs.cypress.io/guides/getting-started/writing-your-first-test#Step-2-Query-for-an-element). Primarily you'll use `cy.get()` to find elements via CSS selectors, `cy.contains()` to find elements via text contents, `cy.click()` and `cy.type()` for input, and `cy.should()` for assertions. Feel free to steal from existing tests in `./cypress/integration/`.
-* Add custom commands under `./cypress/support/commands.js`, and access them via `cy.commandName()`.
-* Seed data for tests is stored under `./cypress/fixtures`, and can be accessed using `cy.fixture('<filepath>')`. See [here](https://docs.cypress.io/api/commands/fixture) for more.
-* To execute code in a node context, you can create a [task](https://docs.cypress.io/api/commands/task#Syntax) under `./cypress/plugins/index.js`. Tasks are executed using `cy.task('<task-name>', args)`.
+- To run Cypress tests locally, first run `yarn ea-start-testing-db`, then in a separate terminal run either `yarn ea-cypress-run` for a CLI version, or `yarn ea-cypress-open` for a GUI version. To run specific tests in the CLI, you can use the `-s <glob-file-pattern>` option.
+- Test database instance settings for Cypress are stored under `./settings-test.json`.
+- For the basics of writing Cypress tests, see [Writing your first test](https://docs.cypress.io/guides/getting-started/writing-your-first-test#Step-2-Query-for-an-element). Primarily you'll use `cy.get()` to find elements via CSS selectors, `cy.contains()` to find elements via text contents, `cy.click()` and `cy.type()` for input, and `cy.should()` for assertions. Feel free to steal from existing tests in `./cypress/integration/`.
+- Add custom commands under `./cypress/support/commands.js`, and access them via `cy.commandName()`.
+- Seed data for tests is stored under `./cypress/fixtures`, and can be accessed using `cy.fixture('<filepath>')`. See [here](https://docs.cypress.io/api/commands/fixture) for more.
+- To execute code in a node context, you can create a [task](https://docs.cypress.io/api/commands/task#Syntax) under `./cypress/plugins/index.js`. Tasks are executed using `cy.task('<task-name>', args)`.

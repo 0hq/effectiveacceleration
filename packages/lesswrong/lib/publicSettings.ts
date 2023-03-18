@@ -48,10 +48,13 @@ export class DatabasePublicSetting<SettingValueType> {
 export const googleTagManagerIdSetting = new DatabasePublicSetting<string | null>("googleTagManager.apiKey", null); // Google Tag Manager ID
 export const reCaptchaSiteKeySetting = new DatabasePublicSetting<string | null>("reCaptcha.apiKey", null); // ReCaptcha API Key
 // Algolia Search Settings
-export const algoliaAppIdSetting = new DatabasePublicSetting<string | null>("algolia.appId", "EO213JH83U");
+export const algoliaAppIdSetting = new DatabasePublicSetting<string | null>(
+  "algolia.appId",
+  process.env.ALGOLIA_APP_ID || null
+);
 export const algoliaSearchKeySetting = new DatabasePublicSetting<string | null>(
   "algolia.searchKey",
-  "1cdaa88528544f2c1cf428ca71865248"
+  process.env.ALGOLIA_SEARCH_KEY || null
 );
 export const algoliaPrefixSetting = new DatabasePublicSetting<string | null>("algolia.indexPrefix", null);
 
