@@ -21,7 +21,7 @@ const walledGardenPortalSubtitle = { subtitleLink: "/walledGarden", subtitle: "W
 const taggingDashboardSubtitle = { subtitleLink: "/tags/dashboard", subtitle: "Wiki-Tag Dashboard" };
 const reviewSubtitle = { subtitleLink: "/reviewVoting", subtitle: `${REVIEW_NAME_IN_SITU} Dashboard` };
 
-const aboutPostIdSetting = new PublicInstanceSetting<string>("aboutPostId", "bJ2haLkcGeLtTWaD5", "warning"); // Post ID for the /about route
+const aboutPostIdSetting = new PublicInstanceSetting<string>("aboutPostId", "yHdkqWLALajevLuZq", "warning"); // Post ID for the /about route
 const faqPostIdSetting = new PublicInstanceSetting<string>("faqPostId", "2rWKkWuPrgTMpLRbp", "warning"); // Post ID for the /faq route
 const contactPostIdSetting = new PublicInstanceSetting<string>("contactPostId", "ehcYkvyz7dh9L7Wt8", "warning");
 const introPostIdSetting = new PublicInstanceSetting<string | null>("introPostId", null, "optional");

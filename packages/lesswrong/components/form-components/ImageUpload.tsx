@@ -12,11 +12,11 @@ import { useDialog } from "../common/withDialog";
 
 const cloudinaryUploadPresetGridImageSetting = new DatabasePublicSetting<string>(
   "cloudinary.uploadPresetGridImage",
-  "tz0mgw2s"
+  "dlfhnnft"
 );
 const cloudinaryUploadPresetBannerSetting = new DatabasePublicSetting<string>(
   "cloudinary.uploadPresetBanner",
-  "navcjwf7"
+  "tz0mgw2s"
 );
 const cloudinaryUploadPresetSocialPreviewSetting = new DatabasePublicSetting<string | null>(
   "cloudinary.uploadPresetSocialPreview",

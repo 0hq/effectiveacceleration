@@ -96,13 +96,7 @@ const CollectionsCard = ({
       <div className={classes.card}>
         <div className={classes.content} style={cardContentStyle}>
           <div className={classes.thumbnailImage}>
-            <img
-              src={
-                "https://res.cloudinary.com/cea/image/upload/c_fill,dpr_2.0,g_custom,h_280,q_auto,w_326/v1/Banner/qnsx7lpxxfpf7tqxmnql"
-              }
-              width={50}
-              height={41}
-            />
+            <CloudinaryImage publicId={collection.imageId} width={50} height={41} />
           </div>
           <Typography variant="title" className={classNames(classes.title, { [classes.mergeTitle]: mergeTitle })}>
             <Link to={url}>{collection.title}</Link>
