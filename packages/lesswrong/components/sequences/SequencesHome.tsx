@@ -38,12 +38,12 @@ const SequencesHome = ({ classes }: { classes: ClassesType }) => {
   return (
     <React.Fragment>
       <AnalyticsContext pageContext="sequencesHome">
-        {forumTypeSetting.get() === "LessWrong" && (
-          <SingleColumnSection>
-            <SectionTitle title="Core Reading" />
-            <Components.CoreReading />
-          </SingleColumnSection>
-        )}
+        {/* {forumTypeSetting.get() === "LessWrong" && ( */}
+        <SingleColumnSection>
+          <SectionTitle title="Core Reading" />
+          <Components.CoreReading />
+        </SingleColumnSection>
+        {/* )} */}
         <Divider />
         <SingleColumnSection>
           <SectionTitle title="Curated Sequences" />
@@ -51,7 +51,7 @@ const SequencesHome = ({ classes }: { classes: ClassesType }) => {
             <Components.SequencesGridWrapper
               terms={{ view: "curatedSequences", limit: 100 }}
               itemsPerPage={24}
-              showAuthor={true}
+              showAuthor={false}
               showLoadMore={true}
             />
           </div>

@@ -515,25 +515,26 @@ export const menuTabs: ForumOptions<Array<MenuTab>> = {
       customComponentName: "SubscribeWidget",
     },
     {
-      id: "about",
-      title: "About the Forum",
-      link: "/about",
-      subItem: true,
-      compressedIconComponent: Info,
-      showOnCompressed: true,
-    },
-    {
       id: "discord",
       title: "Join the Discord Community",
       link: "https://discord.gg/5DcfsE4dw2",
       subItem: true,
     },
+
     {
-      id: "contact",
-      title: "Contact Us",
-      link: "/contact",
+      id: "about",
+      title: "About the Forum",
+      link: "/posts/KyuwpLJjneLDddpmW",
       subItem: true,
+      compressedIconComponent: Info,
+      showOnCompressed: true,
     },
+    // {
+    //   id: "contact",
+    //   title: "Contact Admin",
+    //   link: "/contact",
+    //   subItem: true,
+    // },
   ],
 };
 

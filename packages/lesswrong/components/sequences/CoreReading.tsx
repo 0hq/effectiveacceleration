@@ -37,7 +37,7 @@ const coreReadingCollections: Array<CoreReadingCollection> = forumSelect({
       userId: "jd3Bs7YAT2KqnLxYD",
       summary:
         "To help you learn the basics of effective altruism, we took some of the movement's best writing and made this handbook. Think of it as the textbook you'd get for a college course on EA. It explains the core ideas, so that you can start applying them to your own life.",
-      imageId: "Banner/qnsx7lpxxfpf7tqxmnql",
+      imageId: "ys4kdkvhgxt80czicxiz",
       color: "#0c869b",
       big: true,
       url: "/handbook",
@@ -135,15 +135,15 @@ const coreReadingCollections: Array<CoreReadingCollection> = forumSelect({
   ],
   default: [
     {
-      title: "The EA Handbook",
-      id: "handbook",
-      userId: "jd3Bs7YAT2KqnLxYD",
+      title: "The Substack Sequence",
+      id: "substack",
+      userId: "HSRtxkDQwNNapBHA3",
       summary:
-        "To help you learn the basics of effective altruism, we took some of the movement's best writing and made this handbook. Think of it as the textbook you'd get for a college course on EA. It explains the core ideas, so that you can start applying them to your own life.",
-      imageId: "Banner/qnsx7lpxxfpf7tqxmnql",
-      color: "#0c869b",
+        "These posts come from the effectiveacceleration.substack.com newsletter, contributed to by @BeffJezos, @bayeslord, and @zestular. These posts provide a great foundation to understand the principles of effective accelerationism as presented by some of its early proponents.",
+      imageId: "ys4kdkvhgxt80czicxiz",
+      color: "#d0c9d5",
       big: true,
-      url: "/handbook",
+      url: "/s/fywuJhWrRmJZPhqky",
     },
     {
       title: "Replacing Guilt",
@@ -178,7 +178,7 @@ const CoreReading = ({ minimal = false, classes }: { minimal?: boolean; classes:
       <Components.CollectionsCard collection={coreReadingCollections[0]} url={coreReadingCollections[0].url} />
     </div>
 
-    {!minimal && (
+    {/* {!minimal && (
       <Components.CollectionsCard collection={coreReadingCollections[1]} url={coreReadingCollections[1].url} />
     )}
     {!minimal && (
@@ -187,7 +187,7 @@ const CoreReading = ({ minimal = false, classes }: { minimal?: boolean; classes:
         url={coreReadingCollections[2].url}
         mergeTitle={!isEAForum}
       />
-    )}
+    )} */}
   </Components.CollectionsCardContainer>
 );
 
