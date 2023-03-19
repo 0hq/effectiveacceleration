@@ -3,7 +3,7 @@ import grey from "@material-ui/core/colors/grey";
 import deepOrange from "@material-ui/core/colors/deepOrange";
 
 const sansSerifStack = [
-  "IBM Plex Sans",
+  "Space Grotesk",
   "GreekFallback", // Ensures that greek letters render consistently
   "Calibri",
   '"Gill Sans"',
@@ -34,15 +34,15 @@ const serifStack = [
 const palette = {
   primary: {
     // Affects <a>
-    main: "#6d6d6e",
-    dark: "#6d6d6e",
+    main: "#605368",
+    dark: "#605368",
   },
   secondary: {
-    main: "#6d6d6e",
+    main: "#605368",
   },
   lwTertiary: {
-    main: "#6d6d6e",
-    dark: "#6d6d6e",
+    main: "#605368",
+    dark: "#605368",
   },
   error: {
     main: deepOrange[900],
@@ -59,7 +59,7 @@ const theme = createLWTheme({
   palette: palette,
   typography: {
     fontDownloads: [
-      "https://fonts.googleapis.com/css?family=Manrope:300,400,500,600",
+      "https://fonts.googleapis.com/css?family=Space+Grotesk:400,500,600",
       "https://fonts.googleapis.com/css?family=IBM+Plex+Sans:300,500,600",
     ],
     fontFamily: sansSerifStack,

@@ -140,7 +140,7 @@ const coreReadingCollections: Array<CoreReadingCollection> = forumSelect({
       userId: "HSRtxkDQwNNapBHA3",
       summary:
         "These posts come from the effectiveacceleration.substack.com newsletter, contributed to by @BeffJezos, @bayeslord, and @zestular. These posts provide a great foundation to understand the principles of effective accelerationism as presented by some of its early proponents.",
-      imageId: "ys4kdkvhgxt80czicxiz",
+      imageId: "blhe125ddtnyjoocoal0",
       color: "#d0c9d5",
       big: true,
       url: "/s/fywuJhWrRmJZPhqky",
