@@ -3,7 +3,7 @@ import grey from "@material-ui/core/colors/grey";
 import deepOrange from "@material-ui/core/colors/deepOrange";
 
 const sansSerifStack = [
-  "Mukta",
+  "IBM Plex Sans",
   "GreekFallback", // Ensures that greek letters render consistently
   "Calibri",
   '"Gill Sans"',
@@ -21,7 +21,7 @@ const sansSerifStack = [
 ].join(",");
 
 const serifStack = [
-  "Source Serif Pro",
+  "IBM Plex Sans",
   "warnock-pro",
   "Palatino",
   '"Palatino Linotype"',
@@ -34,21 +34,21 @@ const serifStack = [
 const palette = {
   primary: {
     // Affects <a>
-    main: "#C03A44",
-    dark: "#C03A44",
+    main: "#6d6d6e",
+    dark: "#6d6d6e",
   },
   secondary: {
-    main: "#C03A44",
+    main: "#6d6d6e",
   },
   lwTertiary: {
-    main: "#C03A44",
-    dark: "#C03A44",
+    main: "#6d6d6e",
+    dark: "#6d6d6e",
   },
   error: {
     main: deepOrange[900],
   },
   background: {
-    default: "#f6f8f9",
+    default: "#fafafa",
   },
   event: "#2b6a99",
   group: "#588f27",
@@ -59,8 +59,8 @@ const theme = createLWTheme({
   palette: palette,
   typography: {
     fontDownloads: [
-      "https://fonts.googleapis.com/css?family=Mukta:300,400,500,600",
-      "https://fonts.googleapis.com/css?family=Source+Serif+Pro:300,400,500,600",
+      "https://fonts.googleapis.com/css?family=Manrope:300,400,500,600",
+      "https://fonts.googleapis.com/css?family=IBM+Plex+Sans:300,500,600",
     ],
     fontFamily: sansSerifStack,
     postStyle: {
@@ -105,7 +105,7 @@ const theme = createLWTheme({
       },
     },
 
-/*     MuiToolbar: {
+    /*     MuiToolbar: {
       gutters: {
         '@media (min-width: 600px)': {
           paddingLeft: 16,

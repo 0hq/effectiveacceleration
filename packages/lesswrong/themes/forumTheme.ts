@@ -16,7 +16,7 @@ switch (forumTypeSetting.get()) {
     forumTheme = pfTheme;
     break;
   default:
-    forumTheme = lwTheme;
+    forumTheme = pfTheme;
 }
 
 const forumThemeExport = forumTheme;

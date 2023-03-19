@@ -1,26 +1,25 @@
-import { initializeSetting } from './publicSettings'
-import { isServer, isDevelopment, isAnyTest, getInstanceSettings, getAbsoluteUrl } from './executionEnvironment';
+import { initializeSetting } from "./publicSettings";
+import { isServer, isDevelopment, isAnyTest, getInstanceSettings, getAbsoluteUrl } from "./executionEnvironment";
 
 const getNestedProperty = function (obj, desc) {
-  var arr = desc.split('.');
-  while(arr.length && (obj = obj[arr.shift()]));
+  var arr = desc.split(".");
+  while (arr.length && (obj = obj[arr.shift()]));
   return obj;
 };
 
 // Is any one of the arguments an object
 const anyIsObject = (...args: any[]): boolean => {
-  return args.some(a => typeof a === 'object' && !Array.isArray(a) && a !== null)
-}
+  return args.some((a) => typeof a === "object" && !Array.isArray(a) && a !== null);
+};
 
-export const Settings: Record<string,any> = {};
+export const Settings: Record<string, any> = {};
 
 const getSetting = <T>(settingName: string, settingDefault?: T): T => {
-
   let setting;
   const instanceSettings = getInstanceSettings();
 
   // if a default value has been registered using registerSetting, use it
-  if (typeof settingDefault === 'undefined' && Settings[settingName])
+  if (typeof settingDefault === "undefined" && Settings[settingName])
     settingDefault = Settings[settingName].defaultValue;
 
   if (isServer) {
@@ -28,7 +27,7 @@ const getSetting = <T>(settingName: string, settingDefault?: T): T => {
     const rootSetting = getNestedProperty(instanceSettings, settingName);
     const privateSetting = instanceSettings.private && getNestedProperty(instanceSettings.private, settingName);
     const publicSetting = instanceSettings.public && getNestedProperty(instanceSettings.public, settingName);
-    
+
     // if setting is an object, "collect" properties from all three places
     if (anyIsObject(rootSetting, privateSetting, publicSetting)) {
       setting = {
@@ -38,27 +37,25 @@ const getSetting = <T>(settingName: string, settingDefault?: T): T => {
         ...publicSetting,
       };
     } else {
-      if (typeof rootSetting !== 'undefined') {
+      if (typeof rootSetting !== "undefined") {
         setting = rootSetting;
-      } else if (typeof privateSetting !== 'undefined') {
+      } else if (typeof privateSetting !== "undefined") {
         setting = privateSetting;
-      } else if (typeof publicSetting !== 'undefined') {
+      } else if (typeof publicSetting !== "undefined") {
         setting = publicSetting;
       } else {
         setting = settingDefault;
       }
     }
-
   } else {
     // look only in public
     const publicSetting = instanceSettings.public && getNestedProperty(instanceSettings.public, settingName);
-    setting = typeof publicSetting !== 'undefined' ? publicSetting : settingDefault;
+    setting = typeof publicSetting !== "undefined" ? publicSetting : settingDefault;
   }
 
   // Settings[settingName] = {...Settings[settingName], settingValue: setting};
 
   return setting;
-
 };
 
 /* 
@@ -79,28 +76,32 @@ const getSetting = <T>(settingName: string, settingDefault?: T): T => {
 */
 export class PublicInstanceSetting<SettingValueType> {
   constructor(
-    private settingName: string, 
+    private settingName: string,
     private defaultValue: SettingValueType,
     private settingType: "optional" | "warning" | "required"
   ) {
-    initializeSetting(settingName, "instance")
+    initializeSetting(settingName, "instance");
     if (isDevelopment && settingType !== "optional") {
-      const settingValue = getSetting(settingName)
-      if (typeof settingValue === 'undefined') {
+      const settingValue = getSetting(settingName);
+      if (typeof settingValue === "undefined") {
         if (settingType === "warning") {
           if (!isAnyTest) {
             // eslint-disable-next-line no-console
-            console.log(`No setting value provided for public instance setting for setting with name ${settingName} despite it being marked as warning`)
+            console.log(
+              `No setting value provided for public instance setting for setting with name ${settingName} despite it being marked as warning`
+            );
           }
         }
         if (settingType === "required") {
-          throw Error(`No setting value provided for public instance setting for setting with name ${settingName} despite it being marked as required`)
-        } 
+          throw Error(
+            `No setting value provided for public instance setting for setting with name ${settingName} despite it being marked as required`
+          );
+        }
       }
     }
   }
   get(): SettingValueType {
-    return getSetting(this.settingName, this.defaultValue)
+    return getSetting(this.settingName, this.defaultValue);
   }
 }
 
@@ -108,25 +109,29 @@ export class PublicInstanceSetting<SettingValueType> {
   Public Instance Settings
 */
 
-export type ForumTypeString = "LessWrong"|"AlignmentForum"|"EAForum"|"ProgressForum";
-export const forumTypeSetting = new PublicInstanceSetting<ForumTypeString>('forumType', 'ProgressForum', 'warning') // What type of Forum is being run, {LessWrong, AlignmentForum, EAForum}
-export const forumTitleSetting = new PublicInstanceSetting<string>('title', 'LessWrong', 'warning') // Default title for URLs
+export type ForumTypeString = "LessWrong" | "AlignmentForum" | "EAForum" | "ProgressForum";
+export const forumTypeSetting = new PublicInstanceSetting<ForumTypeString>("forumType", "ProgressForum", "warning"); // What type of Forum is being run, {LessWrong, AlignmentForum, EAForum}
+export const forumTitleSetting = new PublicInstanceSetting<string>("title", "EffectiveAcceleration", "warning"); // Default title for URLs
 
 // Your site name may be referred to as "The Alignment Forum" or simply "LessWrong". Use this setting to prevent something like "view on Alignment Forum". Leave the article uncapitalized ("the Alignment Forum") and capitalize if necessary.
-export const siteNameWithArticleSetting = new PublicInstanceSetting<string>('siteNameWithArticle', "LessWrong", "warning")
+export const siteNameWithArticleSetting = new PublicInstanceSetting<string>(
+  "siteNameWithArticle",
+  "EffectiveAcceleration",
+  "warning"
+);
 
 // NB: Now that neither LW nor the EAForum use this setting, it's a matter of
 // time before it falls out of date. Nevertheless, I expect any newly-created
 // forums to use this setting.
-export const hasEventsSetting = new PublicInstanceSetting<boolean>('hasEvents', false, 'optional') // Whether the current connected server has events activated
+export const hasEventsSetting = new PublicInstanceSetting<boolean>("hasEvents", false, "optional"); // Whether the current connected server has events activated
 
 // Sentry settings
-export const sentryUrlSetting = new PublicInstanceSetting<string|null>('sentry.url', null, "warning"); // DSN URL
-export const sentryEnvironmentSetting = new PublicInstanceSetting<string|null>('sentry.environment', null, "warning"); // Environment, i.e. "development"
-export const sentryReleaseSetting = new PublicInstanceSetting<string|null>('sentry.release', null, "warning") // Current release, i.e. hash of lattest commit
-export const siteUrlSetting = new PublicInstanceSetting<string>('siteUrl', getAbsoluteUrl(), "optional")
+export const sentryUrlSetting = new PublicInstanceSetting<string | null>("sentry.url", null, "warning"); // DSN URL
+export const sentryEnvironmentSetting = new PublicInstanceSetting<string | null>("sentry.environment", null, "warning"); // Environment, i.e. "development"
+export const sentryReleaseSetting = new PublicInstanceSetting<string | null>("sentry.release", null, "warning"); // Current release, i.e. hash of lattest commit
+export const siteUrlSetting = new PublicInstanceSetting<string>("siteUrl", getAbsoluteUrl(), "optional");
 
 // Stripe setting
 
 //Test vs Production Setting
-export const testServerSetting = new PublicInstanceSetting<boolean>("testServer", false, "warning")
+export const testServerSetting = new PublicInstanceSetting<boolean>("testServer", false, "warning");
