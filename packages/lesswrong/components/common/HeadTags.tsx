@@ -11,7 +11,11 @@ export const taglineSetting = new PublicInstanceSetting<string>(
   "warning"
 );
 export const faviconUrlSetting = new PublicInstanceSetting<string>("faviconUrl", "/img/favicon.ico", "warning");
-const tabTitleSetting = new PublicInstanceSetting<string>("forumSettings.tabTitle", "LessWrong", "warning");
+const tabTitleSetting = new PublicInstanceSetting<string>(
+  "forumSettings.tabTitle",
+  "EffectiveAcceleration Forum",
+  "warning"
+);
 
 const HeadTags = ({
   ogUrl: ogUrlProp,
@@ -61,13 +65,13 @@ const HeadTags = ({
         <meta property="og:type" content="article" />
         <meta property="og:url" content={ogUrl} />
         {image && <meta property="og:image" content={image} />}
-        <meta property="og:title" content={titleString} />
+        <meta property="og:title" content={siteName} />
         <meta property="og:description" content={description} />
 
         {/* twitter */}
         <meta name="twitter:card" content="summary" />
         {image && <meta name="twitter:image:src" content={image} />}
-        <meta name="twitter:title" content={titleString} />
+        <meta name="twitter:title" content={siteName} />
         <meta name="twitter:description" content={description} />
 
         {(noIndex || currentRoute?.noIndex) && <meta name="robots" content="noindex" />}
