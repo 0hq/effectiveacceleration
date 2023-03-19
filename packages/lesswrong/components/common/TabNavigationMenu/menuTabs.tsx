@@ -517,7 +517,7 @@ export const menuTabs: ForumOptions<Array<MenuTab>> = {
     {
       id: "discord",
       title: "Join the Discord",
-      link: "https://discord.gg/5DcfsE4dw2",
+      link: "https://discord.gg/e5RUzW2YFq",
       subItem: true,
     },
 
