@@ -3,12 +3,17 @@
 The E/ACC forums are based on Forum Magnum, the codebase powering [LessWrong](https://lesswrong.com) and the
 [Effective Altruism Forum](https://forum.effectivealtruism.org).
 
-The team behind LessWrong created this codebase in 2017 as a rewrite of the
-original version of LessWrong, which was a difficult-to-maintain fork of reddit.
+# Changes
 
-## Running on Server
+Here's a list of needed changes:
+- Mobile use is completely broken, sidebar doesn't work. Styling is bad.
+- We'll need to setup OAuth for Google + Github. 
+- There's a couple broken links around the app.
+- We want to switch to a dark mode style to differentiate. Check LessWrong's dark theme. If someone could replicate with the current app, or even better, merge in from the latest ForumMagnum version that would be incredible.
 
-ngrok http 3000 -hostname=www.effectiveacceleration.org
+Internal tasks:
+- Fix search/algolia as it's very broken with duplicate information and has not properly indexed the app.
+- The instances the app is running on are weak and need to be strengthened.
 
 ## Technologies
 
